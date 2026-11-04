@@ -131,16 +131,16 @@ function finish(){
   const previous=Math.max(best,storedBest());
   best=Math.max(previous,state.score);
   if(best>previous)save(bestKey,best);
-  $("finalScore").textContent=format(state.score);$("finalBest").textContent=format(best);
+  $("finalScore").textContent=format(state.score);
   $("finalHand").textContent="+"+format(state.bestHand);
-  $("roundSummary").textContent="任食完成"+(state.extraMoves?" · 額外獎勵 "+state.extraMoves+" 啖":"");
+  $("roundSummary").textContent="任食完成";
   $("resultFavorites").replaceChildren(...state.favorites.map((type,i)=>{
     const row=document.createElement("div"), name=document.createElement("dt"), count=document.createElement("dd");
     name.textContent=state.menu[type].name;count.textContent="已消 "+format(state.favoriteCounts[i])+" "+state.menu[type].unit;
     name.prepend(foodThumbnail(type,state.menu));row.append(name,count);return row;
   }));
-  $("recordMessage").textContent=previous===0?"首個任食紀錄":state.score>previous?"刷新個人歷史最佳！":state.score===previous?"追平個人歷史最佳！":"";
-  paintStats();shell.finish();
+  const recordMessage=previous===0?"首個任食紀錄":state.score>previous?"刷新個人歷史最佳！":state.score===previous?"追平個人歷史最佳！":"";
+  paintStats();shell.finish(recordMessage);
   announce("挑戰完成，本局 "+format(state.score)+" 分，本局最高單啖得分 "+format(state.bestHand)+" 分。");
 }
 function retireGuide(){if(state.guided){state.guided=false;save(guideKey,1);}}

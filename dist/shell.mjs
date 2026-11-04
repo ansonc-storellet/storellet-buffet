@@ -30,7 +30,7 @@ export class PreviewFlow {
 
 export function createShell({onStart,onHelp,onExit,getBest,storage,now=()=>Date.now()}){
   const $=id=>document.getElementById(id),flow=new PreviewFlow(storage,now);
-  let midnightTimer;
+  let midnightTimer,recordMessage="";
   const screens={home:$('homeScreen'),play:$('playScreen'),result:$('resultDialog'),leaderboard:$('leaderboardScreen')};
   const number=n=>Math.max(0,Number(n)||0).toLocaleString('en-US');
   function update(){
@@ -39,16 +39,16 @@ export function createShell({onStart,onHelp,onExit,getBest,storage,now=()=>Date.
     $('leaderBest').textContent=getBest()?number(getBest()):'—';
     $('leaderRound').hidden=flow.returnScreen!=='result';
     $('leaderRoundScore').textContent=$('finalScore').textContent;
-    $('leaderRecord').textContent=flow.returnScreen==='result'?$('recordMessage').textContent:'';
+    $('leaderRecord').textContent=flow.returnScreen==='result'?recordMessage:'';
     for(const id of ['finalScore','leaderRoundScore']){
       const el=$(id),length=el.textContent.length;
       el.style.fontSize=length>7?Math.max(18,Math.floor(400/length))+'px':'';
     }
-    for(const id of ['finalHand','finalBest','leaderBest']){
+    for(const id of ['finalHand','leaderBest']){
       const el=$(id),length=el.textContent.length;
       el.style.fontSize=length>8?Math.max(14,Math.floor(320/length))+'px':'';
     }
-    document.querySelector('.result-records').classList.toggle('long-values',Math.max($('finalHand').textContent.length,$('finalBest').textContent.length)>9);
+    document.querySelector('.result-records').classList.toggle('long-values',$('finalHand').textContent.length>9);
     document.querySelector('.leader-personal').classList.toggle('long-values',$('leaderBest').textContent.length>9);
     clearTimeout(midnightTimer);
     const shifted=now()+8*60*60*1000;
@@ -87,7 +87,7 @@ export function createShell({onStart,onHelp,onExit,getBest,storage,now=()=>Date.
   return {
     isPlaying:()=>flow.screen==='play',
     start,
-    finish(){if(!flow.finish())return;paint();},
+    finish(message=""){if(!flow.finish())return;recordMessage=message;paint();},
     quit(){if(flow.active)$('quitDialog').showModal();},
     refresh:update
   };
