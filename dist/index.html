@@ -5,9 +5,9 @@
 <meta name="theme-color" content="#102C42"><meta name="description" content="酒店自助餐手機三消。由 30 啖開始，夾啱心頭好，金箭連發，挑戰個人歷史最佳。">
 <title>Storellet仔食自助餐｜任食 30 啖</title>
 <link rel="icon" type="image/webp" href="assets/brand-icon.webp">
-<link rel="stylesheet" href="style.css?v=19"><link rel="stylesheet" href="tile-layer.css?v=19"><link rel="stylesheet" href="awakening.css?v=19"><link rel="stylesheet" href="shell.css?v=19">
+<link rel="stylesheet" href="style.css?v=20"><link rel="stylesheet" href="tile-layer.css?v=20"><link rel="stylesheet" href="awakening.css?v=20"><link rel="stylesheet" href="shell.css?v=20">
 <link rel="preload" href="assets/board-pieces.webp" as="image"><link rel="preload" href="assets/gold-app-icon.webp" as="image"><link rel="preload" href="assets/foods-atlas.webp" as="image"><link rel="preload" href="assets/roast-chicken.webp" as="image"><link rel="preload" href="assets/xiaolongbao.webp" as="image"><link rel="preload" href="assets/wake-approved-comic.webp" as="image"><link rel="preload" href="assets/double-gold-comic.webp" as="image"><link rel="preload" href="assets/wake-eat.webp" as="image"><link rel="preload" href="assets/wake-cold.webp" as="image"><link rel="preload" href="assets/wake-hot.webp" as="image">
-<script type="module" src="game.mjs?v=19"></script>
+<script type="module" src="game.mjs?v=20"></script>
 </head>
 <body>
 <main class="phone" id="phone" aria-label="Storellet仔食自助餐｜任食 30 啖">
@@ -82,23 +82,44 @@
   </div>
   <div id="doubleGold" class="awakening-screen gold-celebration" role="dialog" aria-modal="true" aria-label="Storellet仔雙金優惠爆發" hidden aria-hidden="true" data-stage="0">
     <div class="wake-page" aria-hidden="true"></div>
-    <div class="wake-heading"><span>雙金碰撞</span><strong>優惠多到癲！</strong></div>
     <div class="wake-comic gold-comic">
-      <section class="wake-panel gold-panel gold-eyes" data-wake-panel="1" data-shown="false" aria-hidden="true" aria-label="兩個 Storellet Icon 碰撞，Storellet仔雙眼發出金光：優惠嚟晒！">
-        <div class="gold-art" aria-hidden="true"></div><div class="money-eye-glow" aria-hidden="true"><i></i><i></i></div>
-        <p class="gold-copy">兩個 Icon！<small>優惠嚟晒！</small></p>
-        <div class="gold-pair" aria-hidden="true"><img src="assets/gold-app-icon.webp" alt=""><img src="assets/gold-app-icon.webp" alt=""><b>✦</b></div>
+      <section class="wake-panel gold-panel gold-collision" data-wake-panel="1" data-shown="false" aria-hidden="true" aria-label="兩個金色 Storellet Icon 由左右飛入中央碰撞">
+        <div class="gold-speed-lines" aria-hidden="true"></div>
+        <div class="gold-impact" aria-hidden="true"></div>
+        <div class="gold-pair" aria-hidden="true"><img src="assets/gold-app-icon.webp" alt=""><img src="assets/gold-app-icon.webp" alt=""></div>
       </section>
-      <section class="wake-panel gold-panel gold-offers" data-wake-panel="2" data-shown="false" aria-hidden="true" aria-label="Storellet 優惠同金幣湧出，優惠多到癲咗！">
-        <div class="gold-art" aria-hidden="true"></div><p class="gold-copy"><small>Storellet 優惠</small>多到癲咗！</p>
-        <div class="coupon-rush" aria-hidden="true"><i>優惠</i><i>優惠</i><i>優惠</i></div>
+      <section class="wake-panel gold-panel gold-eyes" data-wake-panel="2" data-shown="false" aria-hidden="true" aria-label="Storellet仔雙眼發出金色錢符號光芒">
+        <div class="gold-art" aria-hidden="true"></div>
+        <div class="money-eye-glow" aria-hidden="true"><i></i><i></i></div>
       </section>
-      <section class="wake-panel gold-panel gold-rich" data-wake-panel="3" data-shown="false" aria-hidden="true" aria-label="Storellet仔興奮跳起，雙眼發光：呢次發達啦！">
-        <div class="gold-art" aria-hidden="true"></div><p class="gold-copy">呢次<br>發達啦！</p><strong class="gold-shout" aria-hidden="true">癲咗！</strong>
-        <div class="gold-rain" aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i><i>✧</i><i>✦</i></div>
+      <section class="wake-panel gold-panel gold-rich" data-wake-panel="3" data-shown="false" aria-hidden="true" aria-label="大量優惠券同金幣喺 Storellet仔身邊飛舞：咁多優惠，今次發達啦！">
+        <div class="gold-art" aria-hidden="true"></div>
+        <div class="gold-loot" aria-hidden="true">
+          <i class="flying-coupon" style="--x:9%;--y:58%;--dx:10cqw;--dy:-12cqw;--delay:-.2s;--turn:24deg"></i>
+          <i class="flying-coupon" style="--x:29%;--y:86%;--dx:-13cqw;--dy:-15cqw;--delay:-1.6s;--turn:-28deg"></i>
+          <i class="flying-coupon" style="--x:89%;--y:18%;--dx:-7cqw;--dy:10cqw;--delay:-.9s;--turn:-36deg"></i>
+          <i class="flying-coupon" style="--x:93%;--y:71%;--dx:-6cqw;--dy:-13cqw;--delay:-2s;--turn:38deg"></i>
+          <i class="flying-coupon" style="--x:41%;--y:94%;--dx:-18cqw;--dy:-7cqw;--delay:-.5s;--turn:19deg"></i>
+          <i class="flying-coupon" style="--x:69%;--y:84%;--dx:17cqw;--dy:-9cqw;--delay:-1.3s;--turn:-23deg"></i>
+          <i class="flying-coupon" style="--x:38%;--y:15%;--dx:9cqw;--dy:-10cqw;--delay:-2.4s;--turn:32deg"></i>
+          <i class="flying-coupon" style="--x:6%;--y:90%;--dx:9cqw;--dy:-11cqw;--delay:-1s;--turn:-40deg"></i>
+          <i class="flying-coin" style="--x:5%;--y:46%;--dx:9cqw;--dy:9cqw;--delay:-.7s;--turn:125deg"></i>
+          <i class="flying-coin" style="--x:18%;--y:72%;--dx:-10cqw;--dy:-16cqw;--delay:-1.8s;--turn:-180deg"></i>
+          <i class="flying-coin" style="--x:31%;--y:50%;--dx:-9cqw;--dy:14cqw;--delay:-.1s;--turn:210deg"></i>
+          <i class="flying-coin" style="--x:39%;--y:88%;--dx:-12cqw;--dy:6cqw;--delay:-2.3s;--turn:-150deg"></i>
+          <i class="flying-coin" style="--x:56%;--y:94%;--dx:8cqw;--dy:-8cqw;--delay:-1.1s;--turn:190deg"></i>
+          <i class="flying-coin" style="--x:79%;--y:93%;--dx:11cqw;--dy:-10cqw;--delay:-.4s;--turn:-220deg"></i>
+          <i class="flying-coin" style="--x:94%;--y:84%;--dx:-8cqw;--dy:-14cqw;--delay:-2.1s;--turn:130deg"></i>
+          <i class="flying-coin" style="--x:89%;--y:47%;--dx:10cqw;--dy:-14cqw;--delay:-1.5s;--turn:245deg"></i>
+          <i class="flying-coin" style="--x:91%;--y:9%;--dx:-10cqw;--dy:10cqw;--delay:-.8s;--turn:-170deg"></i>
+          <i class="flying-coin" style="--x:43%;--y:8%;--dx:13cqw;--dy:-8cqw;--delay:-1.9s;--turn:170deg"></i>
+          <i class="flying-coin" style="--x:34%;--y:39%;--dx:6cqw;--dy:-13cqw;--delay:-.3s;--turn:-200deg"></i>
+          <i class="flying-coin" style="--x:3%;--y:96%;--dx:12cqw;--dy:-8cqw;--delay:-2.5s;--turn:160deg"></i>
+        </div>
+        <p class="gold-copy"><span>咁多優惠，</span><strong>今次發達啦！</strong></p>
       </section>
     </div>
-    <div class="wake-footer"><span id="goldReward">優惠多到癲 · 獎勵 3 啖</span><span class="wake-progress" aria-hidden="true"><i></i></span></div>
+    <div class="wake-footer"><span id="goldReward" class="visually-hidden">雙金優惠，獎勵 3 啖</span><span class="wake-progress" aria-hidden="true"><i></i></span></div>
     <button type="button" id="goldSkip" class="wake-skip" aria-label="略過雙金優惠演出">略過 ›</button>
   </div>
   <p id="live" class="visually-hidden" aria-live="polite" aria-atomic="true"></p>

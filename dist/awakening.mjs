@@ -32,7 +32,7 @@ export function createAwakening(screen, skip, {mode="food"} = {}) {
     screen.dataset.reduced = String(reduced.matches);
     screen.dataset.stage = "0";
     screen.style.setProperty("--wake-duration", `${duration}ms`);
-    screen.setAttribute("aria-label", doubleGold?"雙金優惠爆發，Storellet仔雙眼發光：優惠多到癲，呢次發達啦！":`Storellet仔${verb}到至愛${name}，用埋 Storellet 優惠，幸福爆燈`);
+    screen.setAttribute("aria-label", doubleGold?"兩個金色 Icon 碰撞，Storellet仔雙眼發光，優惠券同金幣飛舞：咁多優惠，今次發達啦！":`Storellet仔${verb}到至愛${name}，用埋 Storellet 優惠，幸福爆燈`);
     if (title) title.textContent = name;
     if (taste) {
       const foodName = document.createElement("b");

@@ -1,4 +1,4 @@
-import { GOLD_ICON, FAVORITE_GOLD_POINTS, SIZE, MENU, foodType, kindOf } from "./engine.mjs?v=19";
+import { GOLD_ICON, FAVORITE_GOLD_POINTS, SIZE, MENU, foodType, kindOf } from "./engine.mjs?v=20";
 
 const position = (x,y) => "translate3d(" + x*100 + "%," + y*100 + "%,0)";
 const point = pos => [pos%SIZE,Math.floor(pos/SIZE)];
