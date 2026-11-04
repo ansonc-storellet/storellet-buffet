@@ -1,4 +1,4 @@
-import { MENU, drawMenu } from './menu.mjs?v=18';
+import { MENU, drawMenu } from './menu.mjs?v=19';
 export { MENU };
 export const SIZE = 7;
 export const TURNS = 30;

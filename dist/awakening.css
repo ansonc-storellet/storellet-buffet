@@ -89,9 +89,11 @@
 }
 
 /* Double gold celebrates an overflow of offers, with a separate comic. */
+.gold-celebration{animation:none}
 .gold-celebration .wake-page{background:radial-gradient(ellipse at 55% 48%,#704b16,#102c42 73%)}
 .gold-comic{grid-template-rows:repeat(3,minmax(0,1fr));height:min(150cqw,100%);gap:9px}
 .gold-panel{background:#102c42;outline-color:#f1c353;border-color:#102c42}
+.gold-panel[data-shown=true]{animation:gold-panel-reveal 420ms cubic-bezier(.18,.75,.24,1) both}
 .gold-art{position:absolute;inset:0;background-image:url('assets/double-gold-comic.webp');background-size:100% 300%;background-repeat:no-repeat;transform-origin:70% 50%}
 .gold-eyes .gold-art{background-position:center top}
 .gold-offers .gold-art{background-position:center center}
@@ -124,7 +126,8 @@
 .gold-rain i:nth-child(2){left:84%;top:16%;--spark-delay:300ms}.gold-rain i:nth-child(3){left:50%;top:80%;--spark-delay:650ms}.gold-rain i:nth-child(4){left:93%;top:65%;--spark-delay:450ms}.gold-rain i:nth-child(5){left:34%;top:7%;--spark-delay:850ms}
 .gold-rich[data-shown=true] .gold-rain i{animation:wake-spark-breathe 1700ms var(--spark-delay,0ms) ease-in-out infinite}
 @keyframes gold-camera{from{transform:scale(1.10) translateX(1%)}to{transform:scale(1)}}
-@keyframes gold-caption{from{opacity:0;translate:-14px 7px;scale:.8}to{opacity:1;translate:0 0;scale:1}}
+@keyframes gold-panel-reveal{from{transform:translateY(10px) scale(.97)}to{transform:none}}
+@keyframes gold-caption{from{translate:-14px 7px;scale:.8}to{translate:0 0;scale:1}}
 @keyframes gold-eye-charge{0%,100%{opacity:.35;scale:.9}50%{opacity:.9;scale:1.12}}
 @keyframes gold-icon-left{from{translate:-55% 0;rotate:-20deg;opacity:.3}to{translate:0 0;rotate:0deg;opacity:1}}
 @keyframes gold-icon-right{from{translate:55% 0;rotate:20deg;opacity:.3}to{translate:0 0;rotate:0deg;opacity:1}}
