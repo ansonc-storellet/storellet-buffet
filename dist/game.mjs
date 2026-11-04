@@ -1,14 +1,15 @@
 import {
   SIZE, OPENING_MOVE, GOLD_ICON, adjacent, swapped, findMove, suggestMove, reshuffle, createRound,
   roundFinished, scoreWave, finishBite, takeRemoval, foodType, kindOf, planSwap, naturalWave, dropWave
-} from "./engine.mjs?v=17";
-import { TileLayer, foodThumbnail } from "./tile-layer.mjs?v=17";
-import { createAwakening } from "./awakening.mjs?v=17";
-import { createShell } from "./shell.mjs?v=17";
+} from "./engine.mjs?v=18";
+import { TileLayer, foodThumbnail } from "./tile-layer.mjs?v=18";
+import { createAwakening } from "./awakening.mjs?v=18";
+import { createShell } from "./shell.mjs?v=18";
 
 const $ = id => document.getElementById(id);
 const boardEl=$("board"), help=$("helpDialog");
 const showAwakening=createAwakening($("awakening"),$("wakeSkip"));
+const showDoubleGold=createAwakening($("doubleGold"),$("goldSkip"),{mode:"double-gold"});
 const bestKey="storellet.cafe-match.score30.flat.v2.best";
 const guideKey="storellet.cafe-match.phase1.guided";
 const cells=[], arrows=[];
@@ -178,9 +179,12 @@ async function settle(first){
     tip(headline+"　呢啖 +"+format(state.handScore));paintStats();
     await tiles.clear(plan,award.cells);
     // Run the cut-in after the matching foods burn. Scoring and the extra move are already committed.
-    if(award.wakeFoods.length){
+    if(award.celebration){
       await tiles.readAwakeningScores();
-      await playTaste(award.wakeFoods,false,award.bonusMoves);
+      if(award.celebration==="double-gold"){
+        announce("雙金優惠爆發！呢次發達啦！獎勵 "+award.bonusMoves+" 啖。");
+        await showDoubleGold({bonusMoves:award.bonusMoves});
+      } else await playTaste(award.wakeFoods,false,award.bonusMoves);
     }
     const drop=dropWave(state.board,plan);
     state.board=drop.board;paintBoard();await tiles.fall(drop.board,drop.fromRow);
@@ -336,9 +340,14 @@ for(const [i,id] of ["previewAwakening","previewDrinkAwakening"].entries())$(id)
   help.close();setBusy(true);await playTaste([state.favorites[i]],true);setBusy(false);
   help.showModal();$(id).focus({preventScroll:true});
 });
+$("previewDoubleGold").addEventListener("click",async()=>{
+  if(!shell.isPlaying() || !help.open || state.busy || state.over)return;
+  help.close();setBusy(true);await showDoubleGold({preview:true});setBusy(false);
+  help.showModal();$("previewDoubleGold").focus({preventScroll:true});
+});
 function openHelp(origin="play"){
   if(origin==="play")setRemoving(false);
-  for(const id of ["previewAwakening","previewDrinkAwakening","shuffleInHelp","quitGame"])$(id).hidden=origin!=="play";
+  for(const id of ["previewAwakening","previewDrinkAwakening","previewDoubleGold","shuffleInHelp","quitGame"])$(id).hidden=origin!=="play";
   help.querySelector(".menu-guide").hidden=origin!=="play";
   $("backToBoard").textContent=origin==="play"?"繼續玩":"知道喇";
   help.showModal();

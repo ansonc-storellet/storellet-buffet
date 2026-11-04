@@ -35,7 +35,6 @@ export function createShell({onStart,onHelp,onExit,getBest,storage,now=()=>Date.
   const number=n=>Math.max(0,Number(n)||0).toLocaleString('en-US');
   function update(){
     $('homeFreeCount').textContent=flow.remainingFree();
-    $('homeBest').textContent=getBest()?number(getBest()):'—';
     $('leaderBest').textContent=getBest()?number(getBest()):'—';
     $('leaderRound').hidden=flow.returnScreen!=='result';
     $('leaderRoundScore').textContent=$('finalScore').textContent;

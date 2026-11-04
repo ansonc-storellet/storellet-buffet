@@ -3,34 +3,36 @@ const DURATION = 6600;
 const REDUCED_DURATION = 3400;
 const REVEALS = [0, 2000, 3800];
 
-export function createAwakening(screen, skip) {
+export function createAwakening(screen, skip, {mode="food"} = {}) {
+  const doubleGold=mode==="double-gold";
+  const reveals=doubleGold?[0,2300,4800]:REVEALS;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const panels = [...screen.querySelectorAll("[data-wake-panel]")];
   const title = screen.querySelector("#wakeCause");
   const taste = screen.querySelector("#wakeTasteLine");
   const foodArt = screen.querySelector("#wakeFoodArt");
   const diner = screen.querySelector("#wakeDiner");
-  const reward = screen.querySelector("#wakeReward");
+  const reward = screen.querySelector(doubleGold?"#goldReward":"#wakeReward");
   let playing = null;
 
-  return function show({ food, foods = food ? [food] : [], preview = false, bonusMoves = 1, thumbnail } = {}) {
+  return function show({ food, foods = food ? [food] : [], preview = false, bonusMoves = doubleGold ? 3 : 1, thumbnail } = {}) {
     if (playing) return playing;
     if (document.hidden) return Promise.resolve();
 
     const name = food?.name || "至愛美食";
     const drink = food?.category === "drink";
-    const kind = drink ? (food.temperature === "hot" ? "hot" : "cold") : "eat";
+    const kind = doubleGold ? "double-gold" : drink ? (food.temperature === "hot" ? "hot" : "cold") : "eat";
     const verb = drink ? "飲" : "食";
-    const duration = reduced.matches ? REDUCED_DURATION : DURATION;
+    const duration = reduced.matches ? (doubleGold?4200:REDUCED_DURATION) : (doubleGold?8400:DURATION);
     screen.dataset.food = food?.id || "";
-    screen.dataset.category = drink ? "drink" : "food";
+    screen.dataset.category = doubleGold?"offers":drink ? "drink" : "food";
     screen.dataset.kind = kind;
     screen.dataset.temperature = food?.temperature || "ambient";
     screen.dataset.preview = String(preview);
     screen.dataset.reduced = String(reduced.matches);
     screen.dataset.stage = "0";
     screen.style.setProperty("--wake-duration", `${duration}ms`);
-    screen.setAttribute("aria-label", `Storellet仔${verb}到至愛${name}，用埋 Storellet 優惠，幸福爆燈`);
+    screen.setAttribute("aria-label", doubleGold?"雙金優惠爆發，Storellet仔雙眼發光：優惠多到癲，呢次發達啦！":`Storellet仔${verb}到至愛${name}，用埋 Storellet 優惠，幸福爆燈`);
     if (title) title.textContent = name;
     if (taste) {
       const foodName = document.createElement("b");
@@ -39,7 +41,9 @@ export function createAwakening(screen, skip) {
     }
     if (foodArt) foodArt.replaceChildren(...(thumbnail ? [thumbnail] : []));
     if (diner) diner.src = `assets/wake-${kind}.webp`;
-    if (reward) reward.textContent = preview ? "幸福爆燈預覽" : `幸福爆燈 · 獎勵 ${bonusMoves} 啖`;
+    if (reward) reward.textContent = doubleGold
+      ? (preview?"雙金優惠動畫預覽":`優惠多到癲 · 獎勵 ${bonusMoves} 啖`)
+      : (preview?"幸福爆燈預覽":`幸福爆燈 · 獎勵 ${bonusMoves} 啖`);
     // Keep all triggering favourites available to accessible inspection, without
     // adding crowded copy to the comic or pretending they are the pictured food.
     screen.dataset.foods = foods.map(entry => entry.id).join(",");
@@ -103,7 +107,7 @@ export function createAwakening(screen, skip) {
         panels.forEach((_, index) => reveal(index));
       } else {
         reveal(0);
-        REVEALS.slice(1).forEach((delay, index) => timers.push(setTimeout(() => reveal(index + 1), delay)));
+        reveals.slice(1).forEach((delay, index) => timers.push(setTimeout(() => reveal(index + 1), delay)));
       }
       timers.push(setTimeout(finish, duration));
     });

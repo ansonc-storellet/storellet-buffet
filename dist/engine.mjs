@@ -1,4 +1,4 @@
-import { MENU, drawMenu } from './menu.mjs?v=17';
+import { MENU, drawMenu } from './menu.mjs?v=18';
 export { MENU };
 export const SIZE = 7;
 export const TURNS = 30;
@@ -294,7 +294,8 @@ export function scoreWave(state,plan) {
   const bonusMoves=plan.doubleGold?3:wakeFoods.length?1:0;
   state.extraMoves+=bonusMoves;state.moves+=bonusMoves;
   state.score+=points;state.handScore+=points;
-  return {points,cells,earned,wakeFoods,bonusMoves};
+  const celebration=plan.doubleGold?"double-gold":wakeFoods.length?"favorite":null;
+  return {points,cells,earned,wakeFoods,bonusMoves,celebration};
 }
 
 

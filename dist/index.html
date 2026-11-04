@@ -5,9 +5,9 @@
 <meta name="theme-color" content="#102C42"><meta name="description" content="酒店自助餐手機三消。由 30 啖開始，夾啱心頭好，金箭連發，挑戰個人歷史最佳。">
 <title>Storellet仔食自助餐｜任食 30 啖</title>
 <link rel="icon" type="image/webp" href="assets/brand-icon.webp">
-<link rel="stylesheet" href="style.css?v=17"><link rel="stylesheet" href="tile-layer.css?v=17"><link rel="stylesheet" href="awakening.css?v=17"><link rel="stylesheet" href="shell.css?v=17">
-<link rel="preload" href="assets/board-pieces.webp" as="image"><link rel="preload" href="assets/gold-app-icon.webp" as="image"><link rel="preload" href="assets/foods-atlas.webp" as="image"><link rel="preload" href="assets/roast-chicken.webp" as="image"><link rel="preload" href="assets/xiaolongbao.webp" as="image"><link rel="preload" href="assets/wake-approved-comic.webp" as="image"><link rel="preload" href="assets/wake-eat.webp" as="image"><link rel="preload" href="assets/wake-cold.webp" as="image"><link rel="preload" href="assets/wake-hot.webp" as="image">
-<script type="module" src="game.mjs?v=17"></script>
+<link rel="stylesheet" href="style.css?v=18"><link rel="stylesheet" href="tile-layer.css?v=18"><link rel="stylesheet" href="awakening.css?v=18"><link rel="stylesheet" href="shell.css?v=18">
+<link rel="preload" href="assets/board-pieces.webp" as="image"><link rel="preload" href="assets/gold-app-icon.webp" as="image"><link rel="preload" href="assets/foods-atlas.webp" as="image"><link rel="preload" href="assets/roast-chicken.webp" as="image"><link rel="preload" href="assets/xiaolongbao.webp" as="image"><link rel="preload" href="assets/wake-approved-comic.webp" as="image"><link rel="preload" href="assets/double-gold-comic.webp" as="image"><link rel="preload" href="assets/wake-eat.webp" as="image"><link rel="preload" href="assets/wake-cold.webp" as="image"><link rel="preload" href="assets/wake-hot.webp" as="image">
+<script type="module" src="game.mjs?v=18"></script>
 </head>
 <body>
 <main class="phone" id="phone" aria-label="Storellet仔食自助餐｜任食 30 啖">
@@ -25,7 +25,6 @@
       <p class="freeplay-line">每日免費 3 次 · 今日剩餘 <b id="homeFreeCount">3</b> 次</p>
       <button class="shell-button shell-primary start-button" id="startGame"><strong>開始遊戲 <span aria-hidden="true">›</span></strong><small>試玩版無限次玩 · 不扣積分</small></button>
       <div class="shell-actions"><button class="shell-button shell-outline" id="homeLeaderboard">活動龍虎榜</button><button class="shell-button shell-blue" id="homeRules">玩法</button></div>
-      <p class="home-record">個人歷史最佳 <b id="homeBest">—</b></p>
       <button class="shell-link" id="homeTerms">活動條款及細則</button>
     </div>
   </section>
@@ -81,6 +80,27 @@
     <div class="wake-footer"><span id="wakeReward">幸福爆燈 · 獎勵 1 啖</span><span class="wake-progress" aria-hidden="true"><i></i></span></div>
     <button type="button" id="wakeSkip" class="wake-skip" aria-label="略過幸福爆燈演出">略過 ›</button>
   </div>
+  <div id="doubleGold" class="awakening-screen gold-celebration" role="dialog" aria-modal="true" aria-label="Storellet仔雙金優惠爆發" hidden aria-hidden="true" data-stage="0">
+    <div class="wake-page" aria-hidden="true"></div>
+    <div class="wake-heading"><span>雙金碰撞</span><strong>優惠多到癲！</strong></div>
+    <div class="wake-comic gold-comic">
+      <section class="wake-panel gold-panel gold-eyes" data-wake-panel="1" data-shown="false" aria-hidden="true" aria-label="兩個 Storellet Icon 碰撞，Storellet仔雙眼發出金光：優惠嚟晒！">
+        <div class="gold-art" aria-hidden="true"></div><div class="money-eye-glow" aria-hidden="true"><i></i><i></i></div>
+        <p class="gold-copy">兩個 Icon！<small>優惠嚟晒！</small></p>
+        <div class="gold-pair" aria-hidden="true"><img src="assets/gold-app-icon.webp" alt=""><img src="assets/gold-app-icon.webp" alt=""><b>✦</b></div>
+      </section>
+      <section class="wake-panel gold-panel gold-offers" data-wake-panel="2" data-shown="false" aria-hidden="true" aria-label="Storellet 優惠同金幣湧出，優惠多到癲咗！">
+        <div class="gold-art" aria-hidden="true"></div><p class="gold-copy"><small>Storellet 優惠</small>多到癲咗！</p>
+        <div class="coupon-rush" aria-hidden="true"><i>優惠</i><i>優惠</i><i>優惠</i></div>
+      </section>
+      <section class="wake-panel gold-panel gold-rich" data-wake-panel="3" data-shown="false" aria-hidden="true" aria-label="Storellet仔興奮跳起，雙眼發光：呢次發達啦！">
+        <div class="gold-art" aria-hidden="true"></div><p class="gold-copy">呢次<br>發達啦！</p><strong class="gold-shout" aria-hidden="true">癲咗！</strong>
+        <div class="gold-rain" aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i><i>✧</i><i>✦</i></div>
+      </section>
+    </div>
+    <div class="wake-footer"><span id="goldReward">優惠多到癲 · 獎勵 3 啖</span><span class="wake-progress" aria-hidden="true"><i></i></span></div>
+    <button type="button" id="goldSkip" class="wake-skip" aria-label="略過雙金優惠演出">略過 ›</button>
+  </div>
   <p id="live" class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
   </div>
   <section id="resultDialog" class="shell-screen result-screen" aria-labelledby="resultTitle" hidden inert>
@@ -113,13 +133,14 @@
     <p class="rule-combos"><b><img class="combo-key gold-key" src="assets/gold-app-icon.webp" alt="">五連變金色 Storellet Icon</b>連 5 件或砌成 T、L 形，留低金色 Icon，再送 1 次「移除一格」。</p>
     <p><b>幸福爆燈，獎勵 1 啖</b>金色 Icon 同隔籬食物交換，會燒晒全盤同款。直接燒中指定食物，每件 +60，觸發一次「幸福爆燈」，額外獎勵 1 啖。</p>
     <p><b>金色 Icon ＋任何食物箭嘴</b>全盤同款一齊變箭嘴，儲力後分三批掃。交換嗰支先射，其餘橫直交替，由近至遠爆。配指定食物，先有每件 +60 同「幸福爆燈」；其他同款每件 +10。每格只計一次，箭嘴掃中嘅其他食物照計 +10 或 +30。</p>
-    <p><b>兩粒金色 Icon 對換</b>清全盤，指定食物每件 +60，其他食物每件 +10，獎勵共 3 啖（唔再另加 1 啖）。燒中指定食物會播放一次「幸福爆燈」。畀箭嘴引爆嘅其他金色 Icon，會燒棋盤上最多嗰款。</p>
+    <p><b>兩粒金色 Icon 對換</b>清全盤，指定食物每件 +60，其他食物每件 +10，獎勵共 3 啖（唔再另加 1 啖）。播放專屬「優惠多到癲」漫畫，Storellet仔雙眼發光，優惠湧出！畀箭嘴引爆嘅其他金色 Icon，會燒棋盤上最多嗰款。</p>
     <p><b>移除一格，唔扣啖數</b>開局有 1 次。撳道具再點一格：普通食物消一格；橫箭掃一行，直箭掃一列；金色 Icon 燒走全盤最多嗰款食物，亦會連帶引爆其他特殊食物。Icon 本身唔計分，燒中指定食物照計每件 +60，並額外獎勵 1 啖。</p>
     <p><b>提示同免費洗牌</b>提示會標出眼前得分最高嘅交換。同分優先揀可觸發「幸福爆燈」嘅交換，其次揀可砌金色 Icon，再揀可砌箭嘴。冇有效交換會自動洗牌，啖數、分數同道具照保留。</p>
     <p><b>個人歷史最佳</b>此瀏覽器會記低你玩過嘅最高總分。</p>
   </div>
   <button type="button" class="preview-wake" id="previewAwakening">預覽幸福爆燈 · 食物篇</button>
   <button type="button" class="preview-wake" id="previewDrinkAwakening">預覽幸福爆燈 · 飲品篇</button>
+  <button type="button" class="preview-wake" id="previewDoubleGold">預覽雙金優惠動畫</button>
   <button type="button" class="text-btn" id="shuffleInHelp">洗牌一次（唔扣啖數）</button>
   <button class="cta" id="backToBoard">繼續玩</button><button class="shell-link" id="quitGame">返回主頁</button>
 </div></dialog>

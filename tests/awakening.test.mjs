@@ -2,13 +2,13 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createAwakening} from '../dist/awakening.mjs';
 
-function setup(reduced=false,hidden=false){
+function setup(reduced=false,hidden=false,mode="food"){
   const doc=new EventTarget(),win=new EventTarget();doc.hidden=hidden;
   globalThis.document=doc;globalThis.window=win;globalThis.matchMedia=()=>({matches:reduced});
   function element(){return {dataset:{},attributes:{},textContent:'',setAttribute(k,v){this.attributes[k]=v;},replaceChildren(...nodes){this.nodes=nodes;}};}
   doc.createElement=element;doc.createTextNode=text=>({textContent:text});
   const panels=Array.from({length:3},element);
-  const nodes=Object.fromEntries(['wakeCause','wakeTasteLine','wakeFoodArt','wakeDiner','wakeReward'].map(id=>[id,element()]));
+  const nodes=Object.fromEntries(['wakeCause','wakeTasteLine','wakeFoodArt','wakeDiner','wakeReward','goldReward'].map(id=>[id,element()]));
   const skip=new EventTarget(),focus={isConnected:true,disabled:false,restores:0,focus(){doc.activeElement=this;this.restores++;}};
   doc.activeElement=focus;skip.focus=()=>{doc.activeElement=skip;};
   const neighbor={id:'board',inert:false},existing={id:'existing',inert:true},announce={id:'live',inert:false};
@@ -17,7 +17,7 @@ function setup(reduced=false,hidden=false){
   let now=0,id=0;const timers=new Map();
   globalThis.setTimeout=(fn,ms)=>{timers.set(++id,{at:now+ms,fn});return id;};globalThis.clearTimeout=id=>timers.delete(id);
   function advance(to){while(true){const next=[...timers].filter(([,t])=>t.at<=to).sort((a,b)=>a[1].at-b[1].at)[0];if(!next)break;now=next[1].at;timers.delete(next[0]);next[1].fn();}now=to;}
-  return {doc,win,skip,screen,focus,neighbor,existing,announce,nodes,panels,timers,advance,show:createAwakening(screen,skip)};
+  return {doc,win,skip,screen,focus,neighbor,existing,announce,nodes,panels,timers,advance,show:createAwakening(screen,skip,{mode})};
 }
 function restored(s){assert.equal(s.screen.hidden,true);assert.equal(s.screen.attributes['aria-hidden'],'true');assert.equal(s.neighbor.inert,false);assert.equal(s.existing.inert,true);assert.equal(s.announce.inert,false);assert.equal(s.doc.activeElement,s.focus);assert.equal(s.timers.size,0);}
 const steak={id:'steak',name:'牛扒',category:'food',temperature:'hot'};
@@ -59,4 +59,22 @@ test('double-gold comic displays the awarded three bites and preview stays non-a
  s.skip.dispatchEvent(new Event('click'));await p;
  const preview=s.show({food:steak,preview:true,bonusMoves:3});
  assert.equal(s.nodes.wakeReward.textContent,'幸福爆燈預覽');s.skip.dispatchEvent(new Event('click'));await preview;
+});
+
+
+test('double-gold has its own three-panel money-eyes scene, with no food and an automatic return',async()=>{
+ const s=setup(false,false,'double-gold'),p=s.show({bonusMoves:3});
+ assert.equal(s.screen.dataset.kind,'double-gold');assert.equal(s.screen.dataset.foods,'');
+ assert.equal(s.nodes.goldReward.textContent,'優惠多到癲 · 獎勵 3 啖');
+ assert.deepEqual(s.panels.map(x=>x.dataset.shown),['true','false','false']);
+ s.advance(2300);assert.equal(s.screen.dataset.stage,'2');
+ s.advance(4800);assert.equal(s.screen.dataset.stage,'3');
+ s.advance(8399);assert.equal(s.screen.hidden,false);s.advance(8400);await p;restored(s);
+});
+test('double-gold reduced motion and Skip preserve the same cleanup and preview semantics',async()=>{
+ const s=setup(true,false,'double-gold'),p=s.show({preview:true});
+ assert.equal(s.nodes.goldReward.textContent,'雙金優惠動畫預覽');
+ assert.deepEqual(s.panels.map(x=>x.dataset.shown),['true','true','true']);
+ assert.equal(s.screen.style['--wake-duration'],'4200ms');
+ s.skip.dispatchEvent(new Event('click'));await p;restored(s);
 });

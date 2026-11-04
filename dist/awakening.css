@@ -87,3 +87,46 @@
  .awakening-screen,.awakening-screen *,.awakening-screen *::before,.awakening-screen *::after{animation:none!important}
  .dream-burst,.dream-sparks,.deal-spark,.wake-steam,.wake-progress{display:none}
 }
+
+/* Double gold celebrates an overflow of offers, with a separate comic. */
+.gold-celebration .wake-page{background:radial-gradient(ellipse at 55% 48%,#704b16,#102c42 73%)}
+.gold-comic{grid-template-rows:repeat(3,minmax(0,1fr));height:min(150cqw,100%);gap:9px}
+.gold-panel{background:#102c42;outline-color:#f1c353;border-color:#102c42}
+.gold-art{position:absolute;inset:0;background-image:url('assets/double-gold-comic.webp');background-size:100% 300%;background-repeat:no-repeat;transform-origin:70% 50%}
+.gold-eyes .gold-art{background-position:center top}
+.gold-offers .gold-art{background-position:center center}
+.gold-rich .gold-art{background-position:center bottom}
+.gold-panel[data-shown=true] .gold-art{animation:gold-camera 2100ms cubic-bezier(.2,.8,.3,1) both}
+.gold-copy{position:absolute;z-index:4;top:8%;left:4%;margin:0;color:#fff5cf;text-align:left;
+  font:950 clamp(18px,5.7cqw,27px)/1.2 var(--font);letter-spacing:-.05em;transform:rotate(-4deg);
+  text-shadow:2px 3px 0 #102c42,-1px -1px #102c42;max-width:40%}
+.gold-copy small{display:block;font-size:.68em;color:#f1c353;letter-spacing:-.02em;line-height:1.45;margin:3px 0}
+.gold-panel[data-shown=true] .gold-copy{animation:gold-caption 450ms 160ms cubic-bezier(.16,.8,.2,1) both}
+.money-eye-glow{position:absolute;inset:0;pointer-events:none}
+.money-eye-glow i{position:absolute;left:50%;top:28%;width:14%;height:25%;border-radius:50%;background:radial-gradient(ellipse,#fff1b94d,#ffb9002b 45%,transparent 72%);box-shadow:0 0 18px #ffdc5266;transform:rotate(12deg)}
+.money-eye-glow i+i{left:73%;top:22%}
+.gold-eyes[data-shown=true] .money-eye-glow i{animation:gold-eye-charge 1700ms ease-in-out infinite}
+.gold-pair{position:absolute;z-index:3;left:3%;bottom:8%;width:34%;height:39%;display:flex;align-items:center;justify-content:center}
+.gold-pair img{width:54%;height:auto;filter:drop-shadow(0 0 7px #ffd763);transform:rotate(-12deg)}
+.gold-pair img+img{margin-left:-5%;transform:rotate(12deg)}
+.gold-pair b{position:absolute;left:40%;top:25%;color:#fff7d0;font:900 34px/1 sans-serif;text-shadow:0 0 15px #fff}
+.gold-eyes[data-shown=true] .gold-pair img:first-child{animation:gold-icon-left 800ms cubic-bezier(.2,.8,.2,1) both}
+.gold-eyes[data-shown=true] .gold-pair img+img{animation:gold-icon-right 800ms cubic-bezier(.2,.8,.2,1) both}
+.gold-eyes[data-shown=true] .gold-pair b{animation:gold-eye-charge 1500ms 650ms ease-in-out infinite}
+.coupon-rush{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.coupon-rush i{position:absolute;left:12%;top:65%;padding:3px 9px;border:1px dashed #fff4c5;border-radius:3px;background:#f19938;color:#102c42;box-shadow:0 2px 4px #102c4240;font:900 clamp(12px,3.4cqw,16px)/1.3 var(--font);font-style:normal;opacity:0}
+.coupon-rush i:nth-child(2){left:80%;top:75%;--rush-delay:450ms}.coupon-rush i:nth-child(3){left:40%;top:92%;--rush-delay:900ms}
+.gold-offers[data-shown=true] .coupon-rush i{animation:gold-coupon-rise 2200ms var(--rush-delay,0ms) ease-out infinite}
+.gold-shout{position:absolute;z-index:5;left:8%;bottom:13%;color:#f1c353;font:1000 clamp(27px,9cqw,43px)/1 var(--font);transform:rotate(-12deg);-webkit-text-stroke:2px #102c42;paint-order:stroke fill;text-shadow:3px 4px #102c42}
+.gold-rich[data-shown=true] .gold-shout{animation:gold-caption 600ms 350ms cubic-bezier(.2,.8,.2,1) both}
+.gold-rain{position:absolute;inset:0;pointer-events:none}
+.gold-rain i{position:absolute;left:9%;top:52%;color:#fff6bd;text-shadow:0 0 8px #ffb900;font:900 clamp(20px,6cqw,30px)/1 sans-serif;font-style:normal}
+.gold-rain i:nth-child(2){left:84%;top:16%;--spark-delay:300ms}.gold-rain i:nth-child(3){left:50%;top:80%;--spark-delay:650ms}.gold-rain i:nth-child(4){left:93%;top:65%;--spark-delay:450ms}.gold-rain i:nth-child(5){left:34%;top:7%;--spark-delay:850ms}
+.gold-rich[data-shown=true] .gold-rain i{animation:wake-spark-breathe 1700ms var(--spark-delay,0ms) ease-in-out infinite}
+@keyframes gold-camera{from{transform:scale(1.10) translateX(1%)}to{transform:scale(1)}}
+@keyframes gold-caption{from{opacity:0;translate:-14px 7px;scale:.8}to{opacity:1;translate:0 0;scale:1}}
+@keyframes gold-eye-charge{0%,100%{opacity:.35;scale:.9}50%{opacity:.9;scale:1.12}}
+@keyframes gold-icon-left{from{translate:-55% 0;rotate:-20deg;opacity:.3}to{translate:0 0;rotate:0deg;opacity:1}}
+@keyframes gold-icon-right{from{translate:55% 0;rotate:20deg;opacity:.3}to{translate:0 0;rotate:0deg;opacity:1}}
+@keyframes gold-coupon-rise{0%{opacity:0;transform:translateY(16px) rotate(-15deg) scale(.7)}25%{opacity:.95}80%{opacity:.8}100%{opacity:0;transform:translateY(-75px) rotate(25deg) scale(1.05)}}
+@media(prefers-reduced-motion:reduce){.gold-rain,.coupon-rush,.money-eye-glow{display:none}.gold-pair b{opacity:.8}}

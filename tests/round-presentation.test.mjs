@@ -48,7 +48,7 @@ test("only direct gold burns pay 60 and awaken; simultaneous arrow collateral ke
   const a=game.scoreWave(r,p);
   assert.deepEqual(a.cells.map(c=>c.points),[60,60,30,10,10]);
   assert.deepEqual([a.points,r.moves,r.extraMoves,r.removals],[170,31,1,1]);
-  assert.deepEqual(a.wakeFoods,[0]);assert.deepEqual(r.favoriteCounts,[2,1]);
+  assert.deepEqual(a.wakeFoods,[0]);assert.equal(a.celebration,"favorite");assert.deepEqual(r.favoriteCounts,[2,1]);
   const ordinary=game.scoreWave(r,wave([0,4,1,3],[],[gold(0,[4]),{kind:"row",pos:4,targets:[4,1,3]}]));
   assert.deepEqual(ordinary.cells.map(c=>c.points),[10,30,30]);assert.deepEqual(ordinary.wakeFoods,[]);assert.equal(r.moves,31);
 });
@@ -61,7 +61,7 @@ test("swapping two gold icons clears each food once and grants three bites total
   const a=game.scoreWave(r,p);
   assert.equal(a.cells.length,47);assert.equal(new Set(a.cells.map(c=>c.pos)).size,47);
   for(const c of a.cells)assert.equal(c.points,r.favorites.includes(game.foodType(r.board[c.pos]))?60:10);
-  assert.deepEqual(a.wakeFoods,[0,1]);assert.equal(a.bonusMoves,3);
+  assert.deepEqual(a.wakeFoods,[0,1]);assert.equal(a.celebration,"double-gold");assert.equal(a.bonusMoves,3);
   assert.equal(r.moves,9);assert.equal(r.extraMoves,3);
   const hint=game.suggestMove(before,r.favorites);assert.equal(hint.doubleGold,true);assert.equal(hint.bonusMoves,3);
 });
@@ -69,7 +69,7 @@ test("swapping two gold icons clears each food once and grants three bites total
 test("double gold still grants three bites when no specified food is on the board",()=>{
   const r=fresh();r.board=Array(49).fill(2);r.board[0]=game.GOLD_ICON;r.board[1]=game.GOLD_ICON;r.moves=0;
   const p=game.planSwap(r.board,0,1);r.board=game.swapped(r.board,0,1);
-  const a=game.scoreWave(r,p);assert.equal(a.points,470);assert.deepEqual(a.wakeFoods,[]);
+  const a=game.scoreWave(r,p);assert.equal(a.points,470);assert.deepEqual(a.wakeFoods,[]);assert.equal(a.celebration,"double-gold");
   assert.equal(a.bonusMoves,3);assert.equal(r.moves,3);assert.equal(r.extraMoves,3);
 });
 
@@ -120,7 +120,7 @@ test("removing gold burns the most numerous food even when it is not a favorite"
   assert.equal(p.effects[0].targets.length,40);
   assert.equal(p.effects[0].targets[0],9);assert.equal(p.effects[0].targets.at(-1),48);
   assert.equal(a.points,400);assert.equal(a.cells.length,40);assert.ok(a.cells.every(c=>c.points===10));
-  assert.deepEqual(a.wakeFoods,[]);assert.equal(r.moves,30);assert.equal(r.removals,0);
+  assert.deepEqual(a.wakeFoods,[]);assert.equal(r.moves,30);assert.equal(r.removals,0);assert.equal(a.celebration,null);
 });
 
 test("removing gold that burns a favorite pays 60 per food and grants exactly one bite",()=>{
