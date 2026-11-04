@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102C42"><meta name="description" content="酒店自助餐手機三消。由 30 啖開始，夾啱心頭好，金箭連發，挑戰個人歷史最佳。">
+<title>Storellet仔食自助餐｜任食 30 啖</title>
+<link rel="icon" type="image/webp" href="assets/brand-icon.webp">
+<link rel="stylesheet" href="style.css?v=15"><link rel="stylesheet" href="tile-layer.css?v=15"><link rel="stylesheet" href="awakening.css?v=15"><link rel="stylesheet" href="shell.css?v=15">
+<link rel="preload" href="assets/board-pieces.webp" as="image"><link rel="preload" href="assets/gold-app-icon.webp" as="image"><link rel="preload" href="assets/foods-atlas.webp" as="image"><link rel="preload" href="assets/roast-chicken.webp" as="image"><link rel="preload" href="assets/xiaolongbao.webp" as="image"><link rel="preload" href="assets/wake-approved-comic.webp" as="image"><link rel="preload" href="assets/wake-eat.webp" as="image"><link rel="preload" href="assets/wake-cold.webp" as="image"><link rel="preload" href="assets/wake-hot.webp" as="image">
+<script type="module" src="game.mjs?v=15"></script>
+</head>
+<body>
+<main class="phone" id="phone" aria-label="Storellet仔食自助餐｜任食 30 啖">
+  <section id="homeScreen" class="shell-screen home-screen" aria-labelledby="homeTitle">
+    <header class="shell-header"><img src="assets/rewards-orange.webp" alt="Storellet賞"><span class="preview-label">試玩版</span></header>
+    <div class="home-hero">
+      <p class="hero-kicker">任食 30 啖 · 挑戰最高分</p>
+      <h1 id="homeTitle"><span>Storellet仔</span><strong>食自助餐</strong></h1>
+      <div class="hero-stage" aria-hidden="true">
+        <img class="hero-feast" src="assets/buffet-cover-feast.webp" alt="" width="1254" height="1254" fetchpriority="high">
+      </div>
+      <p class="hero-tagline">食到心頭好，幸福爆燈！</p>
+    </div>
+    <div class="home-controls">
+      <p class="freeplay-line">每日免費 3 次 · 今日剩餘 <b id="homeFreeCount">3</b> 次</p>
+      <button class="shell-button shell-primary start-button" id="startGame"><strong>開始遊戲 <span aria-hidden="true">›</span></strong><small>試玩版無限次玩 · 不扣積分</small></button>
+      <div class="shell-actions"><button class="shell-button shell-outline" id="homeLeaderboard">活動龍虎榜</button><button class="shell-button shell-blue" id="homeRules">玩法</button></div>
+      <p class="home-record">個人歷史最佳 <b id="homeBest">—</b></p>
+      <button class="shell-link" id="homeTerms">活動條款及細則</button>
+    </div>
+  </section>
+  <div id="playScreen" class="play-screen" hidden inert>
+  <div class="buffet-scene" aria-hidden="true"></div>
+  <header class="counter">
+    <div class="brandline"><img class="rewards" src="assets/rewards.webp" alt="Storellet賞"><h1 class="round-heading" aria-label="Storellet仔食自助餐｜任食 30 啖"><span class="title-name">Storellet仔食自助餐</span><span class="title-challenge">任食 30 啖</span></h1></div>
+    <div class="shift-strip">
+      <div class="top-score"><span>本局分數</span><strong id="score">0</strong></div>
+      <div class="personal-record" title="個人歷史最佳儲存喺此瀏覽器"><span>個人歷史最佳</span><b id="best">—</b></div>
+      <div class="moves-badge" id="movesBox"><span>剩餘啖數</span><strong id="moves">30</strong></div>
+    </div>
+    <div class="hand-strip" aria-label="單啖得分">
+      <span class="hand-stat"><small>上一啖得分</small><strong id="handScore">+0</strong></span>
+      <span class="hand-stat"><small>本局最高單啖得分</small><strong id="bestHand">+0</strong></span>
+    </div>
+  </header>
+  <section class="favorite-card" aria-label="本局指定食物及已消除數量">
+    <div class="favorite-legend"><small>指定食物</small><b>3 倍分</b></div>
+    <div class="favorites" id="favorites"></div>
+  </section>
+  <section class="arena" aria-label="自助餐棋盤">
+    <div class="board-shell"><div id="board" class="board" role="group" aria-label="七乘七食物棋盤，用手指掃動或點選相鄰兩格"></div></div>
+  </section>
+  <div class="guidance"><span id="tip">交換相鄰兩格，連起 3 件相同食物</span></div>
+  <nav class="dock" aria-label="玩法及道具">
+    <button class="dock-btn settings" id="helpButton" aria-label="玩法及道具說明"><span class="orb"><svg aria-hidden="true"><use href="assets/counter.svg#gear"/></svg></span><span class="tool-name">玩法</span></button>
+    <button class="dock-btn" id="hintButton" aria-label="提示，無限次"><span class="orb"><svg aria-hidden="true"><use href="assets/counter.svg#hint"/></svg><i>∞</i></span><span class="tool-name">提示</span></button>
+    <button class="dock-btn" id="removeButton" aria-pressed="false"><span class="orb"><svg aria-hidden="true" viewBox="0 0 64 64"><rect x="9" y="9" width="46" height="46" rx="12" fill="#F19938" stroke="#102C42" stroke-width="4"/><path d="M21 32h22" fill="none" stroke="#102C42" stroke-width="7" stroke-linecap="round"/></svg><b id="removeCount">1</b></span><span class="tool-name">移除一格</span></button>
+  </nav>
+  <div id="awakening" class="awakening-screen" role="dialog" aria-modal="true" aria-label="Storellet仔幸福爆燈" hidden aria-hidden="true" data-stage="0">
+    <div class="wake-page" aria-hidden="true"></div>
+    <div class="wake-heading"><span>至愛 <b id="wakeCause">龍蝦</b></span><strong>幸福爆燈</strong></div>
+    <div class="wake-comic">
+      <section class="wake-panel taste-panel" data-wake-panel="1" data-shown="false" aria-hidden="true">
+        <div class="taste-halo" aria-hidden="true"></div>
+        <img id="wakeDiner" class="taste-diner" src="assets/wake-eat.webp" alt="" width="1254" height="1254">
+        <div id="wakeFoodArt" class="wake-food-art" aria-hidden="true"></div>
+        <div class="wake-steam" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="taste-copy"><strong id="wakeTasteLine">我真係好鍾意食<br><b>龍蝦</b>呀！</strong></div>
+        <span class="taste-effect" aria-hidden="true">正！</span>
+      </section>
+      <section class="wake-panel deal-panel" data-wake-panel="2" data-shown="false" aria-hidden="true" aria-label="仲有 Storellet 優惠！好抵呀！已用優惠。">
+        <img class="approved-sheet" src="assets/wake-approved-comic.webp" alt="" width="1024" height="1536">
+        <span class="deal-spark" aria-hidden="true">✧</span>
+      </section>
+      <section class="wake-panel dream-panel" data-wake-panel="3" data-shown="false" aria-hidden="true" aria-label="Storellet仔開心到流眼淚：太美好啦！我係咪發緊夢呀？">
+        <img class="approved-sheet" src="assets/wake-approved-comic.webp" alt="" width="1024" height="1536">
+        <div class="dream-burst" aria-hidden="true"></div>
+        <div class="dream-sparks" aria-hidden="true"><i>✧</i><i>✦</i><i>✧</i></div>
+      </section>
+    </div>
+    <div class="wake-footer"><span id="wakeReward">幸福爆燈 · 獎勵 1 啖</span><span class="wake-progress" aria-hidden="true"><i></i></span></div>
+    <button type="button" id="wakeSkip" class="wake-skip" aria-label="略過幸福爆燈演出">略過 ›</button>
+  </div>
+  <p id="live" class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
+  </div>
+  <section id="resultDialog" class="shell-screen result-screen" aria-labelledby="resultTitle" hidden inert>
+    <header class="shell-header"><img src="assets/rewards-orange.webp" alt="Storellet賞"><span class="preview-label">本局成績</span></header>
+    <div class="result-content">
+      <div class="result-mascot" aria-hidden="true"><span>✦</span><img src="assets/diner-tears.webp" alt="" width="640" height="640"><span>✧</span></div>
+      <p class="result-summary" id="roundSummary">任食完成</p><h2 id="resultTitle" tabindex="-1">本局總分</h2>
+      <strong id="finalScore" class="final-score">0</strong><p class="record-note" id="recordMessage"></p>
+      <dl class="result-records"><div><dt>本局最高單啖得分</dt><dd id="finalHand">+0</dd></div><div><dt>個人歷史最佳</dt><dd id="finalBest">0</dd></div></dl>
+      <div class="result-foods"><h3>指定食物已消除</h3><dl id="resultFavorites" aria-label="指定食物已消除數量"></dl></div>
+    </div>
+    <footer class="result-footer"><button class="shell-button shell-primary" id="resultLeaderboard">查看龍虎榜 <span aria-hidden="true">›</span></button><div class="shell-actions"><button class="shell-button shell-outline" id="resultHome">返回主頁</button><button class="shell-button shell-blue" id="resultAction">再玩一次</button></div><p class="shell-note">試玩成績儲存於此瀏覽器</p></footer>
+  </section>
+  <section id="leaderboardScreen" class="shell-screen leaderboard-screen" aria-labelledby="leaderTitle" hidden inert>
+    <header class="shell-header"><button id="leaderBack" class="shell-back" aria-label="返回上一頁">‹ 返回</button><img src="assets/rewards-orange.webp" alt="Storellet賞"></header>
+    <div class="leader-content"><p class="hero-kicker">食到盡興 · 挑戰高分</p><h2 id="leaderTitle" tabindex="-1">活動龍虎榜</h2>
+      <div class="leader-round" id="leaderRound" hidden><span>本局總分</span><strong id="leaderRoundScore">0</strong><p id="leaderRecord"></p></div>
+      <div class="leader-personal"><div><span>個人排名</span><b>—</b></div><div><span>個人歷史最佳</span><b id="leaderBest">—</b></div></div>
+      <p class="leader-note">每位玩家以最高單局分數排名<br>同分時，較早達到該分數者優先</p>
+      <div class="leader-table-wrap"><table class="leader-table"><caption class="visually-hidden">活動龍虎榜</caption><thead><tr><th scope="col">排名</th><th scope="col">Storellet ID</th><th scope="col">分數</th></tr></thead><tbody><tr><td colspan="3"><div class="leader-empty"><span aria-hidden="true">🏆</span><strong>活動龍虎榜尚未開放</strong><p>試玩成績不參與正式排名</p></div></td></tr></tbody></table></div>
+    </div><footer class="leader-footer"><button class="shell-button shell-primary" id="leaderRewards">查看獎勵</button><p class="shell-note">活動日期及獎勵將另行公布</p></footer>
+  </section>
+</main>
+<dialog id="helpDialog" class="popup" aria-labelledby="helpTitle"><div class="popup-inner">
+  <button class="x" id="closeHelp" aria-label="關閉玩法">×</button><p class="eyebrow">任食 30 啖</p><h2 id="helpTitle">點樣鬥高分？</h2>
+  <div class="rules">
+    <p><b>開餐！任食 30 啖</b>交換相鄰兩格，橫排或直排連到 3 件就消除。成功交換先食 1 啖，每件 +10，指定食物 +30。跌落再消都係同一啖。</p>
+    <div class="menu-guide"><b>本局餐牌</b><ul id="roundMenu" class="round-menu" aria-label="本局六款食物及飲品"></ul><p>每局抽 6 款，全局保持同一餐牌。指定食物會揀一款食物、一款飲品。</p></div>
+    <p class="rule-combos"><b><svg class="combo-key" aria-hidden="true"><use href="assets/specials.svg#row-badge"/></svg>四連變箭嘴</b>橫連留橫箭嘴，直連留直箭嘴。再消到箭嘴，就會掃走成行或成列。</p>
+    <p class="rule-combos"><b><img class="combo-key gold-key" src="assets/gold-app-icon.webp" alt="">五連變金色 Storellet Icon</b>連 5 件或砌成 T、L 形，留低金色 Icon，再送 1 次「移除一格」。</p>
+    <p><b>幸福爆燈，獎勵 1 啖</b>金色 Icon 同隔籬食物交換，會燒晒全盤同款。直接燒中指定食物，每件 +50，觸發一次「幸福爆燈」，額外獎勵 1 啖。</p>
+    <p><b>金色 Icon ＋任何食物箭嘴</b>全盤同款一齊變箭嘴，儲力後分三批掃。交換嗰支先射，其餘橫直交替，由近至遠爆。配指定食物，先有每件 +50 同「幸福爆燈」；其他同款每件 +10。每格只計一次，箭嘴掃中嘅其他食物照計 +10 或 +30。</p>
+    <p><b>兩粒金色 Icon 對換</b>清全盤，每件指定食物 +50，觸發一次「幸福爆燈」，額外獎勵 1 啖。畀箭嘴引爆嘅其他金色 Icon，會燒棋盤上最多嗰款。</p>
+    <p><b>移除一格，唔扣啖數</b>開局有 1 次。撳道具再點一格：普通食物消一格；橫箭掃一行，直箭掃一列；金色 Icon 燒走全盤最多嗰款食物，亦會連帶引爆其他特殊食物。Icon 本身唔計分，燒中指定食物照計每件 +50，並額外獎勵 1 啖。</p>
+    <p><b>提示同免費洗牌</b>提示會標出眼前得分最高嘅交換。同分優先揀可觸發「幸福爆燈」嘅交換，其次揀可砌金色 Icon，再揀可砌箭嘴。冇有效交換會自動洗牌，啖數、分數同道具照保留。</p>
+    <p><b>個人歷史最佳</b>此瀏覽器會記低你玩過嘅最高總分。</p>
+  </div>
+  <button type="button" class="preview-wake" id="previewAwakening">預覽幸福爆燈 · 食物篇</button>
+  <button type="button" class="preview-wake" id="previewDrinkAwakening">預覽幸福爆燈 · 飲品篇</button>
+  <button type="button" class="text-btn" id="shuffleInHelp">洗牌一次（唔扣啖數）</button>
+  <button class="cta" id="backToBoard">繼續玩</button><button class="shell-link" id="quitGame">返回主頁</button>
+</div></dialog>
+
+<dialog id="campaignDialog" class="shell-dialog" aria-labelledby="campaignTitle"><div class="shell-dialog-inner"><button id="campaignClose" class="shell-close" aria-label="關閉活動詳情">×</button><p class="hero-kicker">Storellet仔食自助餐</p><h2 id="campaignTitle">活動獎勵</h2><div class="campaign-symbol" aria-hidden="true">🎁</div><h3>正式活動即將公布</h3><p>活動日期、獎勵及派發安排，<br>以正式活動公布為準。</p><div class="campaign-rules"><p>每日 3 次免費遊戲機會，於香港時間 00:00 重置。額外每次使用 1 個 Storellet賞積分。</p><p>每位玩家以最高單局分數排名；同分時，較早達到該分數者優先。</p></div><p class="shell-note">此版本可無限次試玩，不扣積分，<br>不參與正式排名或派發獎勵。</p><button id="campaignDone" class="shell-button shell-blue">知道喇</button></div></dialog>
+<dialog id="quitDialog" class="shell-dialog" aria-labelledby="quitTitle"><div class="shell-dialog-inner"><h2 id="quitTitle">返回主頁？</h2><p>本局尚未完成，離開後不會儲存本局分數。</p><button id="quitCancel" class="shell-button shell-primary">繼續食</button><button id="quitConfirm" class="shell-button shell-outline">返回主頁</button></div></dialog>
+<div class="rotate-only"><strong>請直放手機</strong><span>直放就可以繼續玩。</span></div>
+<noscript>請啟用 JavaScript 進行遊戲。</noscript>
+</body></html>

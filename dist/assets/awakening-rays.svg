@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 760" preserveAspectRatio="none">
+  <defs>
+    <pattern id="dots" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-13)">
+      <circle cx="1.7" cy="1.7" r="1.35" fill="#7890a0"/>
+    </pattern>
+  </defs>
+  <g fill="#284b60" opacity=".72">
+    <path d="M0 11v48l99 111ZM0 112v25l104 89ZM0 185v16l69 35ZM36 0h16l76 172ZM86 0h27l49 169ZM157 0h7l16 109ZM211 0h14l-23 142ZM264 0h7l-29 108ZM318 0h25l-86 169ZM400 29v33l-97 103ZM400 111v24l-79 66ZM400 180v13l-57 29Z"/>
+    <path d="M0 760v-35l115-144ZM38 760h24l74-164ZM110 760h17l23-105ZM175 760h8l2-89ZM234 760h9l-15-87ZM293 760h23l-55-142ZM363 760h28l-91-146ZM400 671v31l-71-96ZM400 568v23l-68-51ZM0 564v22l82-64Z"/>
+  </g>
+  <g fill="#070f23" opacity=".53">
+    <path d="M0 0h8l87 136ZM63 0h6l77 173ZM135 0h9l26 138ZM247 0h7l-30 132ZM360 0h21L280 157ZM400 88v8l-88 77ZM0 153v9l68 52Z"/>
+    <path d="M9 760h15l103-161ZM83 760h8l54-128ZM141 760h9l13-93ZM269 760h10l-34-104ZM334 760h13l-63-128ZM400 628v10l-71-75ZM0 655v14l83-87Z"/>
+  </g>
+  <g fill="#f1bc6d" opacity=".47">
+    <path d="M0 64v5l62 60ZM114 0h2l28 83ZM327 0h5l-55 93ZM400 151v3l-46 29ZM0 706v5l65-84ZM67 760h4l47-99ZM348 760h4l-43-77ZM400 626v4l-38-36Z"/>
+  </g>
+  <g fill="#bfd6d8" opacity=".31">
+    <path d="M22 0h2l59 89ZM0 168v2l46 32ZM302 0h2l-32 75ZM400 48v3l-50 50ZM0 606v2l46-35ZM95 760h2l29-83ZM400 728v4l-45-64Z"/>
+  </g>
+  <path d="M0 0h193L0 113Zm400 553v207H202l105-62Z" fill="url(#dots)" opacity=".23"/>
+  <path d="M0 0h81L0 54Zm400 682v78h-72Z" fill="url(#dots)" opacity=".24"/>
+</svg>

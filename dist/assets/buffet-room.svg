@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="480" height="850" viewBox="0 0 480 850" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="wall" x1=".1" x2=".85" y2="1">
+      <stop stop-color="#294850"/><stop offset=".46" stop-color="#54716d"/><stop offset="1" stop-color="#719184"/>
+    </linearGradient>
+    <linearGradient id="arch" x1=".1" x2=".87" y2="1">
+      <stop stop-color="#567572"/><stop offset=".46" stop-color="#87a097"/><stop offset="1" stop-color="#647f7d"/>
+    </linearGradient>
+    <linearGradient id="mirror" x2=".84" y2="1">
+      <stop stop-color="#a2b4a3"/><stop offset=".42" stop-color="#85aaa1"/><stop offset="1" stop-color="#70928e"/>
+    </linearGradient>
+    <linearGradient id="gold" x1=".05" x2=".92" y2=".62">
+      <stop stop-color="#976f46"/><stop offset=".2" stop-color="#e2b76d"/><stop offset=".43" stop-color="#ffdf94"/><stop offset=".68" stop-color="#eebd70"/><stop offset="1" stop-color="#996f43"/>
+    </linearGradient>
+    <linearGradient id="goldFace" x1=".08" x2=".85" y2="1">
+      <stop stop-color="#fff0af"/><stop offset=".29" stop-color="#f1c374"/><stop offset=".72" stop-color="#c3975b"/><stop offset="1" stop-color="#98774e"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#fff0b4" stop-opacity=".58"/><stop offset=".48" stop-color="#f1ce90" stop-opacity=".23"/><stop offset="1" stop-color="#efc589" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="quartz" x1=".1" x2=".77" y2="1">
+      <stop stop-color="#f6e6b9"/><stop offset=".5" stop-color="#f3deb1"/><stop offset="1" stop-color="#ddc69c"/>
+    </linearGradient>
+    <linearGradient id="counter" x2=".76" y2="1">
+      <stop stop-color="#52706b"/><stop offset=".53" stop-color="#37545a"/><stop offset="1" stop-color="#263f4d"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2=".95" y2=".61">
+      <stop stop-color="#879b9c"/><stop offset=".18" stop-color="#b5c6c0"/><stop offset=".3" stop-color="#e2ebe0"/><stop offset=".45" stop-color="#fffae0"/><stop offset=".59" stop-color="#c8d6ca"/><stop offset=".77" stop-color="#9bb3b0"/><stop offset="1" stop-color="#6e9191"/>
+    </linearGradient>
+    <linearGradient id="silverRim" x2="0" y2="1">
+      <stop stop-color="#fcf7db"/><stop offset=".27" stop-color="#cfddd2"/><stop offset=".58" stop-color="#8ea99f"/><stop offset="1" stop-color="#78938c"/>
+    </linearGradient>
+    <linearGradient id="pan" x1=".2" x2=".8" y2="1">
+      <stop stop-color="#8aaba5"/><stop offset=".4" stop-color="#e4e8d4"/><stop offset=".63" stop-color="#b5c8bb"/><stop offset="1" stop-color="#78958e"/>
+    </linearGradient>
+    <linearGradient id="ceramic" x1=".09" x2=".78" y2="1">
+      <stop stop-color="#fffae7"/><stop offset=".44" stop-color="#f7ebcb"/><stop offset="1" stop-color="#c9c1a9"/>
+    </linearGradient>
+    <linearGradient id="greens" x1="0" x2=".63" y2="1">
+      <stop stop-color="#b5cf87"/><stop offset=".5" stop-color="#83b17b"/><stop offset="1" stop-color="#588d73"/>
+    </linearGradient>
+    <linearGradient id="linen" x2=".7" y2="1">
+      <stop stop-color="#fff3cf"/><stop offset=".56" stop-color="#eadab4"/><stop offset="1" stop-color="#c2b391"/>
+    </linearGradient>
+    <g id="lamp" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M0-120V-32" fill="none" stroke="#354c50" stroke-width="4"/>
+      <path d="M-1-120v88" fill="none" stroke="#c1ab76" stroke-width="1.2"/>
+      <rect x="-4" y="-35" width="8" height="13" rx="3" fill="url(#gold)" stroke="#806847" stroke-width="1.4"/>
+      <path d="M-24 1c2-5 8-9 11-17 2-6 5-8 13-8s12 2 14 8C18-7 24-5 27 1Z" fill="url(#goldFace)" stroke="#9a7a4b" stroke-width="1.7"/>
+      <path d="M-15-8c4-4 4-8 8-11m4-1h3" fill="none" stroke="#fff2ba" stroke-width="2.2"/>
+      <ellipse cx="1" cy="2" rx="27" ry="5" fill="#c1955f" stroke="#8b7753" stroke-width="1.4"/>
+      <ellipse cx="1" cy="2" rx="23" ry="3.4" fill="#fff2c5"/>
+      <path d="M-6 3c1 5 12 6 15-.1" fill="#ffedb3" stroke="#e3bd82" stroke-width="1.1"/>
+    </g>
+    <g id="dish" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="0" cy="36" rx="75" ry="9" fill="#8c8670" opacity=".25"/>
+      <path d="m-48 8-4 20q-1 4-7 5l-2 3h14l6-24m90-3 3 19q0 4 7 5l2 3H45l-5-24" fill="url(#gold)" stroke="#8a795d" stroke-width="1.7"/>
+      <path d="m-44 24 84 .6 5 3.8-94-.4Z" fill="url(#pan)" stroke="#7b8d81" stroke-width="1.3"/>
+      <path d="M-10 25h20l-2-7h-16Z" fill="#7c8b7c" stroke="#6a796f" stroke-width="1.2"/>
+      <path d="M-5 19c-2-2 2-4 4-7 0 2 3 3 3 5 2-1 3-3 3-3 2 3 3 5 1 6Z" fill="#f6be62"/>
+      <path d="M-65-10c0 9 6 15 14 19 16 9 71 12 102 0 9-4 13-11 14-19Z" fill="url(#pan)" stroke="#768c82" stroke-width="2"/>
+      <path d="M-58-2c9 7 23 10 39 11m20 .5c19 .6 37-2 52-7" fill="none" stroke="#eff0d6" stroke-width="2"/>
+      <path d="M-68-13c0-6 11-7 19-6l-.2 4c-8-1-14 0-15 2 0 2 5 5 10 6l-.7 3c-8-1-14-6-13-9Zm136 1c1-6-8-9-17-8l-.3 4c7-1 13 .5 14 3 0 2-3 4-10 6l1 3c8-2 13-5 13-8Z" fill="url(#gold)" stroke="#859084" stroke-width="1.4"/>
+      <path d="M-58-14c2-25 18-48 42-54 10-3 20-4 30-1 25 5 44 27 47 54-26 13-91 14-119 1Z" fill="url(#silver)" stroke="#778e89" stroke-width="2.2"/>
+      <path d="M-57-18c10-5 18-6 26-5 11 3 14 11 26 8 17-8 28-15 47-13 9 1 12 2 16 3l2 10c-23 11-82 12-117 1Z" fill="#8ba69b" opacity=".47"/>
+      <path d="M-52-28c4-14 14-25 25-31m6-3 7-1" fill="none" stroke="#fcfae1" stroke-width="3.7"/>
+      <path d="M12-63c6 2 10 7 12 14m7-6c6 8 8 15 9 21" fill="none" stroke="#edf1d8" stroke-width="2.4" opacity=".75"/>
+      <path d="M-6-67v-3c0-2 11-2 12 0v3Z" fill="url(#gold)" stroke="#8c805f" stroke-width="1.3"/>
+      <path d="M-2-70v-3c-3-1-5-3-5-5 0-3 4-5 8-5s8 2 8 5c0 2-3 4-6 5v3Z" fill="url(#goldFace)" stroke="#9b8256" stroke-width="1.4"/>
+      <path d="M-62-16c20 10 90 12 125 0q4 2 1 5c-31 11-99 12-128-1q-2-2 2-4Z" fill="url(#silverRim)" stroke="#798e83" stroke-width="1.6"/>
+      <path d="M-58-15c14 5 28 7 40 8m11 .5 13 .1" fill="none" stroke="#fffbdc" stroke-width="2.1"/>
+    </g>
+    <g id="plates">
+      <ellipse cx="0" cy="4" rx="42" ry="7" fill="#948f75" opacity=".26"/>
+      <path d="M-37-10v11c4 9 68 10 74 0v-11Z" fill="url(#ceramic)" stroke="#a99e84" stroke-width="1.5"/>
+      <path d="M-36-3c8 7 61 8 72 0m-72-4c9 7 60 8 72 0" fill="none" stroke="#b2ac93" stroke-width="1.4"/>
+      <ellipse cy="-10" rx="37.5" ry="7.2" fill="url(#ceramic)" stroke="#baae8f" stroke-width="1.5"/>
+      <ellipse cy="-10" rx="27.7" ry="4.1" fill="none" stroke="#cfbd95" stroke-width="1.2"/>
+      <path d="M-33-12c6-2 12-2 16-2" fill="none" stroke="#fffde8" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+    <g id="salad" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="1" cy="14" rx="63" ry="6" fill="#999275" opacity=".27"/>
+      <path d="M-54-6q4 14 17 18c15 5 56 5 72-1 10-4 15-10 18-18Z" fill="url(#ceramic)" stroke="#a29d84" stroke-width="1.6"/>
+      <ellipse cx="0" cy="-7" rx="55" ry="11" fill="#e2d4b2" stroke="#a8a184" stroke-width="1.6"/>
+      <path d="M-48-8c0-4 4-8 9-8-1-5 5-8 8-6 2-5 9-7 12-4 5-4 9-3 12 0 4-7 14-8 18-4 3-4 11-5 15-.5 6-1 9 4 9 8 7 0 12 4 13 9-13 7-63 10-96 6Z" fill="url(#greens)" stroke="#6f9776" stroke-width="1.5"/>
+      <path d="M-43-13c5-6 11-4 13 0 3-6 9-9 12-6 1 4-2 8-7 10m24-1c1-7 6-13 12-14 2 5-1 11-6 14m14 .7c3-5 7-9 12-9" fill="#9ac287" stroke="#85ad7a" stroke-width="1.1"/>
+      <path d="M-16-18c-2-5 2-9 6-9s8 3 8 8c-1 4-6 5-10 4Zm45 1c-1-3 2-7 5-7 4 0 7 2 7 6s-3 6-6 7Z" fill="#d78362" stroke="#b5735a" stroke-width="1.1"/>
+      <path d="M-12-23c1-1 2-2 4-2m41 4 2-1" stroke="#f4b183" stroke-width="1.5" fill="none"/>
+      <path d="M-33-17c4-6 10-8 15-5m29 7c3-5 7-5 10-4m-21 6 5-3" stroke="#e7c578" stroke-width="3.3" fill="none"/>
+      <path d="M-50-5c27 9 78 9 101-2" fill="none" stroke="#f8ebca" stroke-width="2.5"/>
+      <path d="m23-15 28-22c2-2 5-1 5 1q0 2-2 3L26-12" fill="url(#silverRim)" stroke="#81958b" stroke-width="1.2"/>
+      <path d="m23-13 25-24q2-3 4-2" fill="none" stroke="#92a295" stroke-width="1.5"/>
+    </g>
+  </defs>
+
+  <!-- The recessed mirrors, green panels and brass light fittings of the dining room. -->
+  <path fill="url(#wall)" d="M0 0h480v850H0z"/>
+  <path d="M0 0h480v56L0 84Z" fill="#2b4450"/>
+  <path d="M0 67q232-14 480-17v13Q246 66 0 81Z" fill="#6e8276"/>
+  <path d="M0 70q226-15 480-17" fill="none" stroke="#d5b779" stroke-width="3"/>
+  <path d="M0 84q238-16 480-17v5Q243 74 0 91Z" fill="#293f47" opacity=".53"/>
+  <path d="M-73 467V241c0-72 31-113 72-113s73 40 73 109v230Z" fill="url(#arch)" stroke="#3c585b" stroke-width="6"/>
+  <path d="M-52 463V241c0-53 22-94 51-94s52 34 52 91v223Z" fill="url(#mirror)" stroke="#c0af80" stroke-width="2.4"/>
+  <path d="M82 466V225c0-78 65-144 157-148 93-3 157 59 157 139v250Z" fill="url(#arch)" stroke="#3a5759" stroke-width="6"/>
+  <path d="M96 460V226c0-73 63-134 143-136 82-3 143 53 143 127v240Z" fill="none" stroke="#c4ac78" stroke-width="3"/>
+  <path d="M104 455V226c0-66 58-123 135-126 78-2 135 49 135 117v238Z" fill="url(#mirror)"/>
+  <path d="M410 452V222c0-68 36-106 77-106s75 38 75 105v234Z" fill="url(#arch)" stroke="#3c585b" stroke-width="6"/>
+  <path d="M424 449V222c0-54 24-88 58-88s60 36 60 87v229Z" fill="url(#mirror)" stroke="#b9ad80" stroke-width="2.4"/>
+  <g fill="none" stroke="#d2d1a5" stroke-width="2" stroke-linecap="round" opacity=".53">
+    <path d="M116 388c44-43 83-60 125-62 48-3 87 15 123 47M116 404c44-41 84-57 126-59 44-2 81 13 122 44M115 418c41-37 82-53 127-56 45-3 83 14 122 43"/>
+    <path d="M241 325V112m-7 207-54-189m83 191 49-192m-96 195-84-127m135 124 72-111" opacity=".46"/>
+  </g>
+  <g fill="url(#glow)">
+    <ellipse cx="35" cy="236" rx="116" ry="125"/>
+    <ellipse cx="441" cy="212" rx="123" ry="135"/>
+  </g>
+  <use xlink:href="#lamp" transform="translate(47 183)"/>
+  <use xlink:href="#lamp" transform="translate(434 163) scale(.91)"/>
+
+  <!-- Back service shelf with water, glassware and a little greenery. -->
+  <path d="M0 454q122-8 251-10 133-3 229-2v23L0 486Z" fill="#658478"/>
+  <path d="M0 458q259-15 480-13v8Q243 454 0 472Z" fill="url(#goldFace)"/>
+  <path d="M0 473q253-16 480-16v160H0Z" fill="url(#counter)"/>
+  <g stroke="#adc2a4" stroke-width="1.2" fill="none" opacity=".42">
+    <path d="M18 483v81m7-81v80m115-89v87m7-87v86m172-92v91m7-92v91m104-85v89m7-89v89"/>
+  </g>
+  <g transform="translate(60 450)">
+    <use xlink:href="#plates" transform="scale(.64)"/><use xlink:href="#plates" transform="translate(7 -7) scale(.59)"/>
+  </g>
+  <g transform="translate(393 444)" fill="#c7d7bd" fill-opacity=".68" stroke="#86a59a" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M-9-42q8-4 18 0l-1 10c0 5 7 11 8 23q0 7-7 9h-18q-6-2-5-8c1-13 6-19 6-24Z"/>
+    <path d="M-10-13q10 3 21-1l1 8q-7 4-23 1Z" fill="#a4c9b9" stroke="none"/>
+    <path d="M8-30c13-3 15 10 6 15m-20-12c-3 6-4 8-5 12" fill="none" stroke="#e3e9ca" stroke-width="2"/>
+    <path d="m24-15 13-1-2 15q-5 2-9 0Z" fill="#cbdcc3"/><path d="m39-18 12-.5-1 16q-7 2-10 0Z"/>
+  </g>
+  <g transform="translate(16 454)">
+    <path d="M-2-21c-11-7-16-16-12-26 10 3 14 12 12 26Zm1 1c-1-18 5-29 14-31 2 13-4 22-14 31Zm0 0c-12 .4-22-7-23-15 10-2 19 5 23 15Z" fill="#719574" stroke="#688a70" stroke-width="1.2"/>
+    <path d="M-12-18q13-3 23 0l-3 17q-8 5-16 0Z" fill="url(#ceramic)" stroke="#9a9b7f" stroke-width="1.4"/>
+  </g>
+
+  <!-- The stone serving island wraps through the lower foreground. -->
+  <path d="M-5 613q245-37 491-36v273H-5Z" fill="url(#counter)"/>
+  <path d="M-6 612q246-40 492-39v15q-253 2-492 40Z" fill="url(#quartz)" stroke="#a99470" stroke-width="2"/>
+  <path d="M-6 626q201-34 492-39" fill="none" stroke="#d6b475" stroke-width="2.6"/>
+  <path d="M-8 684q203-27 496-34v112q-261-2-496 39Z" fill="#808e75" opacity=".25"/>
+  <path d="M-7 674q221-26 494-31v102q-291 5-494 42Z" fill="url(#quartz)" stroke="#b29d7b" stroke-width="2.4"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M-5 695c49-5 60 1 98-4 26-4 38-10 73-10m99 44c28-5 45-3 67-6 18-4 25-7 52-9m18-53 55-2" stroke="#caaf86" stroke-width="1.9" opacity=".48"/>
+    <path d="M-5 698c32-3 39-2 55-2m43-4c19-2 33-7 46-8m158 40c22-1 37-2 52-7m48-7 34-2" stroke="#fff2ce" stroke-width="1.7" opacity=".7"/>
+  </g>
+  <path d="M-6 783q211-36 493-40v20q-281 4-493 42Z" fill="url(#goldFace)" stroke="#9e875f" stroke-width="1.8"/>
+  <path d="M-6 787q215-37 493-40" fill="none" stroke="#fff0be" stroke-width="2.4"/>
+  <path d="M-5 803q210-38 490-40v90H-5Z" fill="url(#counter)"/>
+  <path d="M-7 811q220-38 495-40" fill="none" stroke="#869886" stroke-width="2"/>
+  <g fill="none" stroke="#a2ae89" stroke-linecap="round" opacity=".63">
+    <path d="M9 811v44m7-45v44m52-54v55m7-56v56m54-65v64m7-65v65m60-73v73m7-74v74m62-78v78m7-79v79m62-81v81m7-82v82m62-84v84m7-84v84m52-85v85" stroke-width="1.6"/>
+  </g>
+
+  <!-- Lidded silver chafers, a green salad with serving tongs, and guest plates. -->
+  <use xlink:href="#dish" transform="translate(108 700) rotate(-3)"/>
+  <use xlink:href="#dish" transform="translate(373 679) rotate(-1) scale(.9)"/>
+  <use xlink:href="#salad" transform="translate(246 722) rotate(-4)"/>
+  <use xlink:href="#plates" transform="translate(17 759) rotate(-6) scale(.85)"/>
+  <g transform="translate(432 730) rotate(-6)" stroke-linejoin="round">
+    <path d="m-39 .5 35-16 38 12-38 21Z" fill="#b5a380" opacity=".26"/>
+    <path d="m-39-1 33-18L32-5 0 14Z" fill="url(#linen)" stroke="#b6a681" stroke-width="1.5"/>
+    <path d="m-35-2 29-13 1 10 34 .5" fill="none" stroke="#d1ba8e" stroke-width="1.3"/>
+    <path d="m-16 4 21-14c1-1 2-.6 2 .4l-.7 1.5L-13.2 7Z" fill="url(#silver)" stroke="#8e9b8d" stroke-width="1.1"/>
+    <ellipse cx="8" cy="-11" rx="7" ry="3.3" transform="rotate(-31 8 -11)" fill="url(#silver)" stroke="#8e9b8d" stroke-width="1.1"/>
+  </g>
+</svg>
