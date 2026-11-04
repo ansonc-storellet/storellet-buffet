@@ -52,3 +52,11 @@ test('Skip, Escape, background and pagehide each settle once and remove reveal t
 });
 test('a background tab does not take focus or lock board input',async()=>{const s=setup(false,true);await s.show({food:steak});assert.equal(s.screen.hidden,true);assert.equal(s.focus.restores,0);assert.equal(s.neighbor.inert,false);});
 test('Tab remains on Skip and a detached previous target is not refocused',async()=>{const s=setup(),p=s.show({food:steak});const e=new Event('keydown',{cancelable:true});e.key='Tab';s.doc.dispatchEvent(e);assert.equal(e.defaultPrevented,true);assert.equal(s.doc.activeElement,s.skip);s.focus.isConnected=false;s.skip.dispatchEvent(new Event('click'));await p;assert.equal(s.focus.restores,0);assert.equal(s.neighbor.inert,false);});
+
+test('double-gold comic displays the awarded three bites and preview stays non-awarding',async()=>{
+ const s=setup(),p=s.show({food:steak,bonusMoves:3});
+ assert.equal(s.nodes.wakeReward.textContent,'幸福爆燈 · 獎勵 3 啖');
+ s.skip.dispatchEvent(new Event('click'));await p;
+ const preview=s.show({food:steak,preview:true,bonusMoves:3});
+ assert.equal(s.nodes.wakeReward.textContent,'幸福爆燈預覽');s.skip.dispatchEvent(new Event('click'));await preview;
+});

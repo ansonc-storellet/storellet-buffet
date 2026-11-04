@@ -1,4 +1,4 @@
-import { GOLD_ICON, SIZE, MENU, foodType, kindOf } from "./engine.mjs?v=15";
+import { GOLD_ICON, FAVORITE_GOLD_POINTS, SIZE, MENU, foodType, kindOf } from "./engine.mjs?v=17";
 
 const position = (x,y) => "translate3d(" + x*100 + "%," + y*100 + "%,0)";
 const point = pos => [pos%SIZE,Math.floor(pos/SIZE)];
@@ -523,7 +523,7 @@ export class TileLayer {
       const lane=slots[0]<=now+hit || slots[0]<=slots[1] ? 0 : 1;
       const at=Math.max(hit,Math.ceil(slots[lane]-now));
       slots[lane]=now+at+SCORE_LIFE;
-      if(points===50)lastPremium=Math.max(lastPremium,at);
+      if(points===FAVORITE_GOLD_POINTS)lastPremium=Math.max(lastPremium,at);
       const [x,y]=point(pos),pop=document.createElement("span"),number=document.createElement("b");
       pop.className="score-pop";pop.dataset.pos=String(pos);pop.dataset.points=String(points);
       pop.dataset.at=String(at);pop.dataset.lane=String(lane);pop.style.gridArea=(y+1)+" / "+(x+1);

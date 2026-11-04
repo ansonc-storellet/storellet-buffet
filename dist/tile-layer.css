@@ -21,7 +21,7 @@
   paint-order:stroke fill;text-shadow:0 1.5px 0 #0f2b3b,1px 0 #173648,-1px 0 #173648;
 }
 .score-pop[data-points="30"] b{color:#ffce5e}
-.score-pop[data-points="50"] b{
+.score-pop[data-points="60"] b{
   font-size:.91em;color:#a0ffec;background:#133f49;border:1px solid #80e7d4;border-radius:.55em;
   padding:.025em .16em .065em;-webkit-text-stroke:1px #133f49;text-shadow:0 1px 0 #072630;
 }

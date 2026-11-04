@@ -1,10 +1,10 @@
 import {
   SIZE, OPENING_MOVE, GOLD_ICON, adjacent, swapped, findMove, suggestMove, reshuffle, createRound,
   roundFinished, scoreWave, finishBite, takeRemoval, foodType, kindOf, planSwap, naturalWave, dropWave
-} from "./engine.mjs?v=15";
-import { TileLayer, foodThumbnail } from "./tile-layer.mjs?v=15";
-import { createAwakening } from "./awakening.mjs?v=15";
-import { createShell } from "./shell.mjs?v=15";
+} from "./engine.mjs?v=17";
+import { TileLayer, foodThumbnail } from "./tile-layer.mjs?v=17";
+import { createAwakening } from "./awakening.mjs?v=17";
+import { createShell } from "./shell.mjs?v=17";
 
 const $ = id => document.getElementById(id);
 const boardEl=$("board"), help=$("helpDialog");
@@ -157,10 +157,10 @@ function formationText(code){
   if(code===GOLD_ICON)return "五連！金色 Storellet Icon";
   return kindOf(code)==="row"?"四連！橫掃箭嘴":"四連！直掃箭嘴";
 }
-function playTaste(types,preview=false){
+function playTaste(types,preview=false,bonusMoves=1){
   const type=types[0];
-  announce(preview?"預覽 Storellet仔幸福爆燈漫畫":"金色 Icon 燒中"+types.map(i=>state.menu[i].name).join("同")+"，幸福爆燈，獎勵 1 啖！");
-  return showAwakening({food:state.menu[type],foods:types.map(i=>state.menu[i]),preview,thumbnail:foodThumbnail(type,state.menu)});
+  announce(preview?"預覽 Storellet仔幸福爆燈漫畫":"金色 Icon 燒中"+types.map(i=>state.menu[i].name).join("同")+"，幸福爆燈，獎勵 "+bonusMoves+" 啖！");
+  return showAwakening({food:state.menu[type],foods:types.map(i=>state.menu[i]),preview,bonusMoves,thumbnail:foodThumbnail(type,state.menu)});
 }
 async function settle(first){
   let plan=first,earned=0;
@@ -180,7 +180,7 @@ async function settle(first){
     // Run the cut-in after the matching foods burn. Scoring and the extra move are already committed.
     if(award.wakeFoods.length){
       await tiles.readAwakeningScores();
-      await playTaste(award.wakeFoods);
+      await playTaste(award.wakeFoods,false,award.bonusMoves);
     }
     const drop=dropWave(state.board,plan);
     state.board=drop.board;paintBoard();await tiles.fall(drop.board,drop.fromRow);
@@ -320,7 +320,7 @@ $("hintButton").addEventListener("click",async()=>{
     }
     if(!hint)return;
     pair=hint.pair;
-    const reason=hint.conversion?"金箭連發":hint.awakens?"幸福爆燈 · 獎勵 1 啖":hint.gold?"砌金色 Icon":hint.arrows?"砌箭嘴":hint.firesArrow?"箭嘴掃線":"跟箭嘴交換";
+    const reason=hint.doubleGold?"雙金清全盤 · 獎勵 3 啖":hint.conversion?"金箭連發":hint.awakens?"幸福爆燈 · 獎勵 1 啖":hint.gold?"砌金色 Icon":hint.arrows?"砌箭嘴":hint.firesArrow?"箭嘴掃線":"跟箭嘴交換";
     msg=reason+" · 至少 +"+format(hint.points)+" 分";
   }
   markMove(pair);tip(msg);

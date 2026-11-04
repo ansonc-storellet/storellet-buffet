@@ -13,7 +13,7 @@ export function createAwakening(screen, skip) {
   const reward = screen.querySelector("#wakeReward");
   let playing = null;
 
-  return function show({ food, foods = food ? [food] : [], preview = false, thumbnail } = {}) {
+  return function show({ food, foods = food ? [food] : [], preview = false, bonusMoves = 1, thumbnail } = {}) {
     if (playing) return playing;
     if (document.hidden) return Promise.resolve();
 
@@ -39,7 +39,7 @@ export function createAwakening(screen, skip) {
     }
     if (foodArt) foodArt.replaceChildren(...(thumbnail ? [thumbnail] : []));
     if (diner) diner.src = `assets/wake-${kind}.webp`;
-    if (reward) reward.textContent = preview ? "幸福爆燈預覽" : "幸福爆燈 · 獎勵 1 啖";
+    if (reward) reward.textContent = preview ? "幸福爆燈預覽" : `幸福爆燈 · 獎勵 ${bonusMoves} 啖`;
     // Keep all triggering favourites available to accessible inspection, without
     // adding crowded copy to the comic or pretending they are the pictured food.
     screen.dataset.foods = foods.map(entry => entry.id).join(",");

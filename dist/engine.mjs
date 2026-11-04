@@ -1,7 +1,8 @@
-import { MENU, drawMenu } from './menu.mjs?v=15';
+import { MENU, drawMenu } from './menu.mjs?v=17';
 export { MENU };
 export const SIZE = 7;
 export const TURNS = 30;
+export const FAVORITE_GOLD_POINTS = 60;
 // The first swap clears lobster on row 5, dropping tea into a vertical match.
 export const OPENING_MOVE = [32, 31];
 const OPENING = [
@@ -146,7 +147,9 @@ export function planSwap(board,a,b,favorites=null) {
   const kind=kindOf(after[other]);
   const conversion=(kind==="row" || kind==="column")
     ? buildConversion(after,goldPos,other) : undefined;
-  return expandWave(after,[...initial,a,b],upgrades,goldTargets,conversion);
+  const plan=expandWave(after,[...initial,a,b],upgrades,goldTargets,conversion);
+  if(after[a]===GOLD_ICON && after[b]===GOLD_ICON)plan.doubleGold=true;
+  return plan;
 }
 export function swapHits(board,a,b,favorites=null) {
   return planSwap(board,a,b,favorites)?.hits ?? [];
@@ -167,9 +170,11 @@ export function suggestMove(board,favorites=null) {
     if(!favorites)return {pair:[i,j]};
     const cells=foodAwards(swapped(board,i,j),plan,favorites);
     const gold=plan.upgrades.filter(up=>up.code===GOLD_ICON).length;
+    const awakens=cells.some(c=>c.points===FAVORITE_GOLD_POINTS);
     const option={
       pair:[i,j],points:cells.reduce((sum,c)=>sum+c.points,0),
-      awakens:cells.some(c=>c.points===50),gold,arrows:plan.upgrades.length-gold,
+      awakens,gold,arrows:plan.upgrades.length-gold,
+      doubleGold:Boolean(plan.doubleGold),bonusMoves:plan.doubleGold?3:awakens?1:0,
       conversion:Boolean(plan.conversion),firesArrow:plan.effects.some(e=>e.kind==="row"||e.kind==="column")
     };
     if(!best||compareMoves(option,best)>0)best=option;
@@ -265,7 +270,7 @@ function foodAwards(board,plan,favorites) {
     const type=foodType(board[pos]);
     if(type<0)continue;
     let points=10;
-    if(favorites.includes(type))points=burned.has(pos)?50:30;
+    if(favorites.includes(type))points=burned.has(pos)?FAVORITE_GOLD_POINTS:30;
     cells.push({pos,points});
   }
   return cells;
@@ -281,14 +286,15 @@ export function scoreWave(state,plan) {
     if(cell.points===10)continue;
     const type=foodType(state.board[cell.pos]);
     state.favoriteCounts[state.favorites.indexOf(type)]++;
-    if(cell.points===50)awake.add(type);
+    if(cell.points===FAVORITE_GOLD_POINTS)awake.add(type);
   }
   const wakeFoods=state.favorites.filter(type=>awake.has(type));
   const earned=plan.upgrades.filter(up=>up.code===GOLD_ICON).length;
   state.removals+=earned;
-  if(wakeFoods.length){state.extraMoves++;state.moves++;}
+  const bonusMoves=plan.doubleGold?3:wakeFoods.length?1:0;
+  state.extraMoves+=bonusMoves;state.moves+=bonusMoves;
   state.score+=points;state.handScore+=points;
-  return {points,cells,earned,wakeFoods};
+  return {points,cells,earned,wakeFoods,bonusMoves};
 }
 
 

@@ -42,24 +42,43 @@ test("forming one or more gold icons grants one removal each, including a five o
   assert.equal(r.removals,4);
 });
 
-test("only direct gold burns pay 50 and awaken; simultaneous arrow collateral keeps its own price",()=>{
+test("only direct gold burns pay 60 and awaken; simultaneous arrow collateral keeps its own price",()=>{
   const r=fresh();r.board.splice(0,7,game.GOLD_ICON,0,game.lineCode(0,"row"),1,2,3,game.GOLD_ICON);
   const p=wave([0,1,2,3,4,5],[],[gold(0,[1,2]),{kind:"row",pos:2,targets:[1,2,3,4,5]}]);
   const a=game.scoreWave(r,p);
-  assert.deepEqual(a.cells.map(c=>c.points),[50,50,30,10,10]);
-  assert.deepEqual([a.points,r.moves,r.extraMoves,r.removals],[150,31,1,1]);
+  assert.deepEqual(a.cells.map(c=>c.points),[60,60,30,10,10]);
+  assert.deepEqual([a.points,r.moves,r.extraMoves,r.removals],[170,31,1,1]);
   assert.deepEqual(a.wakeFoods,[0]);assert.deepEqual(r.favoriteCounts,[2,1]);
   const ordinary=game.scoreWave(r,wave([0,4,1,3],[],[gold(0,[4]),{kind:"row",pos:4,targets:[4,1,3]}]));
   assert.deepEqual(ordinary.cells.map(c=>c.points),[10,30,30]);assert.deepEqual(ordinary.wakeFoods,[]);assert.equal(r.moves,31);
 });
 
-test("a double icon counts each food once, both specified types pay 50, and one simultaneous awakening returns one move",()=>{
-  const r=fresh();r.board.splice(0,7,game.GOLD_ICON,game.GOLD_ICON,0,1,2,3,4);r.moves=0;
-  const targets=[0,1,2,3,4,5,6],p=wave(targets,[],[gold(0,targets),gold(1,targets)]);
-  const a=game.scoreWave(r,p);assert.deepEqual(a.cells.map(c=>c.points),[50,50,10,10,10]);
-  assert.deepEqual(a.wakeFoods,[0,1]);assert.deepEqual(r.favoriteCounts,[1,1]);
-  assert.equal(r.moves,1);assert.equal(r.extraMoves,1);assert.equal(game.roundFinished(r),false);
-  r.moves--;game.scoreWave(r,wave([2,3,4]));assert.equal(game.roundFinished(r),true);
+test("swapping two gold icons clears each food once and grants three bites total",()=>{
+  const r=fresh();r.board=Array.from({length:49},(_,i)=>(Math.floor(i/7)+i%7)%6);
+  r.board[0]=game.GOLD_ICON;r.board[1]=game.GOLD_ICON;
+  const before=r.board.slice(),p=game.planSwap(before,0,1,r.favorites);
+  r.board=game.swapped(before,0,1);r.moves=6;
+  const a=game.scoreWave(r,p);
+  assert.equal(a.cells.length,47);assert.equal(new Set(a.cells.map(c=>c.pos)).size,47);
+  for(const c of a.cells)assert.equal(c.points,r.favorites.includes(game.foodType(r.board[c.pos]))?60:10);
+  assert.deepEqual(a.wakeFoods,[0,1]);assert.equal(a.bonusMoves,3);
+  assert.equal(r.moves,9);assert.equal(r.extraMoves,3);
+  const hint=game.suggestMove(before,r.favorites);assert.equal(hint.doubleGold,true);assert.equal(hint.bonusMoves,3);
+});
+
+test("double gold still grants three bites when no specified food is on the board",()=>{
+  const r=fresh();r.board=Array(49).fill(2);r.board[0]=game.GOLD_ICON;r.board[1]=game.GOLD_ICON;r.moves=0;
+  const p=game.planSwap(r.board,0,1);r.board=game.swapped(r.board,0,1);
+  const a=game.scoreWave(r,p);assert.equal(a.points,470);assert.deepEqual(a.wakeFoods,[]);
+  assert.equal(a.bonusMoves,3);assert.equal(r.moves,3);assert.equal(r.extraMoves,3);
+});
+
+test("two golds caught by a row arrow grant one bite, not the direct-swap reward",()=>{
+  const r=fresh();r.board=Array(49).fill(0);
+  r.board[0]=game.lineCode(0,"row");r.board[1]=game.GOLD_ICON;r.board[2]=game.GOLD_ICON;
+  const p=game.toolWave(r.board,[0]),a=game.scoreWave(r,p);
+  assert.equal(p.effects.filter(e=>e.kind==="gold").length,2);
+  assert.equal(a.bonusMoves,1);assert.equal(r.moves,31);assert.equal(r.extraMoves,1);
 });
 
 test("ordinary removal consumes one charge, pays for that food and costs no bite",()=>{
@@ -104,11 +123,11 @@ test("removing gold burns the most numerous food even when it is not a favorite"
   assert.deepEqual(a.wakeFoods,[]);assert.equal(r.moves,30);assert.equal(r.removals,0);
 });
 
-test("removing gold that burns a favorite pays 50 per food and grants exactly one bite",()=>{
+test("removing gold that burns a favorite pays 60 per food and grants exactly one bite",()=>{
   const r=fresh();r.board=Array(49).fill(0);r.board[24]=game.GOLD_ICON;
   const p=game.takeRemoval(r,24),a=game.scoreWave(r,p);
   assert.equal(p.remove.length,49);assert.equal(a.cells.length,48);
-  assert.ok(a.cells.every(c=>c.points===50));assert.ok(!a.cells.some(c=>c.pos===24));
-  assert.equal(a.points,2400);assert.deepEqual(a.wakeFoods,[0]);assert.deepEqual(r.favoriteCounts,[48,0]);
+  assert.ok(a.cells.every(c=>c.points===60));assert.ok(!a.cells.some(c=>c.pos===24));
+  assert.equal(a.points,2880);assert.deepEqual(a.wakeFoods,[0]);assert.deepEqual(r.favoriteCounts,[48,0]);
   assert.equal(r.moves,31);assert.equal(r.extraMoves,1);assert.equal(r.removals,0);
 });

@@ -98,7 +98,7 @@ test("gold and a striped favourite arm all and only that food, starting at the o
   assert.equal(new Set(p.hits).size,p.hits.length);
   const r=createRound(true);r.favorites=fav;r.board=after;const a=scoreWave(r,p);
   assert.deepEqual(a.wakeFoods,[type]);assert.equal(r.extraMoves,1);assert.equal(r.removals,1);
-  for(const c of a.cells)assert.equal(c.points,targets.includes(c.pos)?50:after[c.pos]%6===fav[1]?30:10);
+  for(const c of a.cells)assert.equal(c.points,targets.includes(c.pos)?60:after[c.pos]%6===fav[1]?30:10);
   assert.deepEqual(planSwap(before,partner,goldPos,fav).conversion,p.conversion);
 });
 
