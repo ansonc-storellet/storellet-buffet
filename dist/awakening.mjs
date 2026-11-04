@@ -21,7 +21,7 @@ export function createAwakening(screen, skip, {mode="food"} = {}) {
 
     const name = food?.name || "至愛美食";
     const drink = food?.category === "drink";
-    const kind = doubleGold ? "double-gold" : drink ? (food.temperature === "hot" ? "hot" : "cold") : "eat";
+    const kind = doubleGold ? "double-gold" : drink ? (food.temperature === "hot" ? "hot" : "cold") : food?.id === "icecream" ? "spoon" : "eat";
     const verb = drink ? "飲" : "食";
     const duration = reduced.matches ? (doubleGold?4200:REDUCED_DURATION) : (doubleGold?8400:DURATION);
     screen.dataset.food = food?.id || "";

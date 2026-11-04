@@ -1,10 +1,10 @@
 import {
   SIZE, OPENING_MOVE, GOLD_ICON, adjacent, swapped, findMove, suggestMove, reshuffle, createRound,
   roundFinished, scoreWave, finishBite, takeRemoval, foodType, kindOf, planSwap, naturalWave, dropWave
-} from "./engine.mjs?v=21";
-import { TileLayer, foodThumbnail } from "./tile-layer.mjs?v=21";
-import { createAwakening } from "./awakening.mjs?v=21";
-import { createShell } from "./shell.mjs?v=21";
+} from "./engine.mjs?v=22";
+import { TileLayer, foodThumbnail } from "./tile-layer.mjs?v=22";
+import { createAwakening } from "./awakening.mjs?v=22";
+import { createShell } from "./shell.mjs?v=22";
 
 const $ = id => document.getElementById(id);
 const boardEl=$("board"), help=$("helpDialog");

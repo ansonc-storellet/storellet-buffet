@@ -36,6 +36,15 @@ test('three panels reveal at 0/2000/3800 ms and return at 6600 ms without a cont
 test('hot and cold drinks use matching poses, names and verb; preview changes no gameplay state',async()=>{
  const s=setup();for(const food of [tea,lime]){const p=s.show({food,preview:true});assert.equal(s.nodes.wakeCause.textContent,food.name);assert.equal(s.nodes.wakeDiner.src,`assets/wake-${food.temperature}.webp`);assert.equal(s.nodes.wakeTasteLine.nodes[0].textContent,'我真係好鍾意飲');assert.equal(s.nodes.wakeReward.textContent,'幸福爆燈預覽');s.skip.dispatchEvent(new Event('click'));await p;restored(s);}
 });
+test('ice cream uses the dessert spoon pose while retaining food wording and automatic return',async()=>{
+ const s=setup(),food={id:'icecream',name:'雙色雪糕',category:'food',temperature:'cold'};
+ const p=s.show({food});
+ assert.equal(s.nodes.wakeDiner.src,'assets/wake-spoon.webp');
+ assert.equal(s.screen.dataset.category,'food');
+ assert.equal(s.nodes.wakeTasteLine.nodes[0].textContent,'我真係好鍾意食');
+ assert.equal(s.nodes.wakeCause.textContent,'雙色雪糕');
+ s.advance(6600);await p;restored(s);
+});
 test('reduced motion shows a readable static triptych for 3400 ms',async()=>{
  const s=setup(true),p=s.show({food:tea});assert.equal(s.screen.style['--wake-duration'],'3400ms');assert.deepEqual(s.panels.map(p=>p.dataset.shown),['true','true','true']);s.advance(3399);assert.equal(s.screen.hidden,false);s.advance(3400);await p;restored(s);
 });
