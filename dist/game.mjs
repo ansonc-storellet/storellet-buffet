@@ -1,10 +1,10 @@
 import {
   SIZE, OPENING_MOVE, GOLD_ICON, adjacent, swapped, findMove, suggestMove, reshuffle, createRound,
   roundFinished, scoreWave, finishBite, takeRemoval, foodType, kindOf, planSwap, naturalWave, dropWave
-} from "./engine.mjs?v=20";
-import { TileLayer, foodThumbnail } from "./tile-layer.mjs?v=20";
-import { createAwakening } from "./awakening.mjs?v=20";
-import { createShell } from "./shell.mjs?v=20";
+} from "./engine.mjs?v=21";
+import { TileLayer, foodThumbnail } from "./tile-layer.mjs?v=21";
+import { createAwakening } from "./awakening.mjs?v=21";
+import { createShell } from "./shell.mjs?v=21";
 
 const $ = id => document.getElementById(id);
 const boardEl=$("board"), help=$("helpDialog");
@@ -160,7 +160,7 @@ function formationText(code){
 }
 function playTaste(types,preview=false,bonusMoves=1){
   const type=types[0];
-  announce(preview?"預覽 Storellet仔幸福爆燈漫畫":"金色 Icon 燒中"+types.map(i=>state.menu[i].name).join("同")+"，幸福爆燈，獎勵 "+bonusMoves+" 啖！");
+  announce(preview?"預覽 Storellet仔幸福爆燈漫畫":"金色 Icon 直接互換"+types.map(i=>state.menu[i].name).join("同")+"，幸福爆燈，獎勵 "+bonusMoves+" 啖！");
   return showAwakening({food:state.menu[type],foods:types.map(i=>state.menu[i]),preview,bonusMoves,thumbnail:foodThumbnail(type,state.menu)});
 }
 async function settle(first){

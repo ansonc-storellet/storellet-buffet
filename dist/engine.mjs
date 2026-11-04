@@ -1,4 +1,4 @@
-import { MENU, drawMenu } from './menu.mjs?v=20';
+import { MENU, drawMenu } from './menu.mjs?v=21';
 export { MENU };
 export const SIZE = 7;
 export const TURNS = 30;
@@ -149,6 +149,7 @@ export function planSwap(board,a,b,favorites=null) {
     ? buildConversion(after,goldPos,other) : undefined;
   const plan=expandWave(after,[...initial,a,b],upgrades,goldTargets,conversion);
   if(after[a]===GOLD_ICON && after[b]===GOLD_ICON)plan.doubleGold=true;
+  else plan.goldSwapType=foodType(after[other]);
   return plan;
 }
 export function swapHits(board,a,b,favorites=null) {
@@ -162,6 +163,10 @@ export function dropWave(board, plan, random=Math.random) {
 function compareMoves(a,b) {
   return a.points-b.points || Number(a.awakens)-Number(b.awakens) || a.gold-b.gold || a.arrows-b.arrows;
 }
+// Rewards depend on the two tiles the player exchanged, never on chain-hit targets.
+function swapCelebration(plan,favorites) {
+  return plan.doubleGold?"double-gold":favorites.includes(plan.goldSwapType)?"favorite":null;
+}
 export function suggestMove(board,favorites=null) {
   let best=null;
   for(let i=0;i<board.length;i++)for(const j of [i+1,i+SIZE]){
@@ -170,7 +175,7 @@ export function suggestMove(board,favorites=null) {
     if(!favorites)return {pair:[i,j]};
     const cells=foodAwards(swapped(board,i,j),plan,favorites);
     const gold=plan.upgrades.filter(up=>up.code===GOLD_ICON).length;
-    const awakens=cells.some(c=>c.points===FAVORITE_GOLD_POINTS);
+    const awakens=swapCelebration(plan,favorites)!==null;
     const option={
       pair:[i,j],points:cells.reduce((sum,c)=>sum+c.points,0),
       awakens,gold,arrows:plan.upgrades.length-gold,
@@ -288,13 +293,13 @@ export function scoreWave(state,plan) {
     state.favoriteCounts[state.favorites.indexOf(type)]++;
     if(cell.points===FAVORITE_GOLD_POINTS)awake.add(type);
   }
-  const wakeFoods=state.favorites.filter(type=>awake.has(type));
+  const celebration=swapCelebration(plan,state.favorites);
+  const wakeFoods=state.favorites.filter(type=>awake.has(type) && (plan.doubleGold || plan.goldSwapType===type));
   const earned=plan.upgrades.filter(up=>up.code===GOLD_ICON).length;
   state.removals+=earned;
-  const bonusMoves=plan.doubleGold?3:wakeFoods.length?1:0;
+  const bonusMoves=celebration==="double-gold"?3:celebration==="favorite"?1:0;
   state.extraMoves+=bonusMoves;state.moves+=bonusMoves;
   state.score+=points;state.handScore+=points;
-  const celebration=plan.doubleGold?"double-gold":wakeFoods.length?"favorite":null;
   return {points,cells,earned,wakeFoods,bonusMoves,celebration};
 }
 
